@@ -1,0 +1,23 @@
+
+.header {
+    display: flex;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  
+  .logo {
+    margin-right: 30%;
+  }
+  
+  .navigation {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-left: auto;
+    align-items: center;
+    
+    > a {
+      color: white;
+      text-decoration: none;
+    }
+  }
