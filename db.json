@@ -1,0 +1,6 @@
+{
+  "data": [
+    { "id": 1, "title": "json-server", "author": "webstalt" }
+  ],
+  "profile": { "name": "webstalt" }
+}

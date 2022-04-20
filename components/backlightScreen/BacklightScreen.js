@@ -1,9 +1,15 @@
 import { Backlight } from '../backlight/Backlight'
 
-export function BacklightScreen() {
+export function BacklightScreen({ data }) {
   return (
     <Backlight>
-      <div>Backlight Example</div>
+      <span>Backlight Example</span>,{' '}
+      <span>
+        data from{' '}
+        {data.map((item) => (
+          <span key={item.id}>{item.title}</span>
+        ))}
+      </span>
     </Backlight>
   )
 }

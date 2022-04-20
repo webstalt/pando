@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve": "concurrently \"yarn run dev\" \"yarn run mock\"",
+    "mock": "json-server -w db.json -p 4200 -d 450"
   },
   "dependencies": {
     "@babel/core": "^7.17.9",
@@ -16,6 +18,7 @@
     "react-dom": "18.0.0"
   },
   "devDependencies": {
+    "concurrently": "^7.1.0",
     "eslint": "^8.13.0",
     "eslint-config-next": "12.1.5",
     "react-animate-on-scroll": "^2.1.5",
