@@ -14,7 +14,7 @@ function Index(props) {
 }
 
 export async function getServerSideProps(context) {
-  const response = await fetch('http://localhost:4200/data')
+  const response = await fetch(`${process.env.API_URL}/data`)
   const data = await response.json()
 
   return { props: { data } }
