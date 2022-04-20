@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { StyledLink } from '../styledLink/StyledLink'
 
 import classes from './header.module.scss'
 
@@ -13,11 +13,11 @@ export function Header() {
         ></img>
       </div>
       <div className={classes.navigation}>
-        <Link href="/" className={classes.navigationItem}>
+        <StyledLink href="/" className={classes.navigationItem}>
           Main
-        </Link>
-        <Link href="/about">About</Link>
-        <Link href="/contacts">Contacts</Link>
+        </StyledLink>
+        <StyledLink href="/about">About</StyledLink>
+        <StyledLink href="/contacts">Contacts</StyledLink>
       </div>
     </div>
   )

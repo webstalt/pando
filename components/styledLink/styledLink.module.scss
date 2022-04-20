@@ -1,0 +1,19 @@
+.styledLink {
+  cursor: pointer;
+
+  @keyframes textColor {
+    0% {
+      color: #0fffc1;
+    }
+    50% {
+      color: #7e0fff;
+    }
+    100% {
+      color: #0fffc1;
+    }
+  }
+
+  &:hover {
+    animation: textColor 10s ease infinite;
+  }
+}
