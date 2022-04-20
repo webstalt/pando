@@ -2,22 +2,20 @@ import { MainLayout } from '../components/mainLayout/MainLayout'
 import { HelloScreen } from '../components/helloScreen/HelloScreen'
 import { BacklightScreen } from '../components/backlightScreen/BacklightScreen'
 
-function Index(props) {
+export default function Index() {
   return (
     <MainLayout title="Main page">
       <HelloScreen />
-      <BacklightScreen data={props?.data} />
+      <BacklightScreen />
       <HelloScreen />
       <HelloScreen />
     </MainLayout>
   )
 }
 
-export async function getServerSideProps(context) {
-  const response = await fetch(`${process.env.API_URL}/data`)
-  const data = await response.json()
+// export async function getServerSideProps(context) {
+//   const response = await fetch(`${process.env.API_URL}/data`)
+//   const data = await response.json()
 
-  return { props: { data } }
-}
-
-export default Index
+//   return { props: { data } }
+// }

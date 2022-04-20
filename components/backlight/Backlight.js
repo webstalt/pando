@@ -1,5 +1,5 @@
-import styles from './backlight.module.scss'
+import classes from './backlight.module.scss'
 
 export function Backlight({ children }) {
-  return <div className={styles.backlight}>{children}</div>
+  return <div className={classes.backlight}>{children}</div>
 }

@@ -7,8 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "ci": "yarn install --frozen-lockfile",
     "serve": "concurrently \"yarn run dev\" \"yarn run mock\"",
-    "mock": "json-server -w db.json -p 4200 -d 450"
+    "mock": "json-server -w db.json -p 4200 -d 450",
+    "export": "next export"
   },
   "dependencies": {
     "@babel/core": "^7.17.9",
@@ -21,6 +23,7 @@
     "concurrently": "^7.1.0",
     "eslint": "^8.13.0",
     "eslint-config-next": "12.1.5",
+    "node-sass": "^7.0.1",
     "react-animate-on-scroll": "^2.1.5",
     "sass": "^1.50.1"
   }
