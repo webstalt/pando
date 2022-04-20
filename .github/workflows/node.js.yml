@@ -28,3 +28,4 @@ jobs:
         cache: 'yarn'
     - run: yarn ci
     - run: yarn build
+    - run: yarn export
