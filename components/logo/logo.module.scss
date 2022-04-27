@@ -5,7 +5,7 @@
 }
 
 .name {
-  font-size: 200px;
+  font-size: 50px;
 }
 
 .dot {
@@ -14,20 +14,20 @@
   right: 0;
   content: ' ';
 
-  width: 150px;
-  height: 100px;
+  width: 30px;
+  height: 20px;
   background-color: black;
-  transform: translate(50%, -10%) rotateZ(-60deg);
+  transform: translate(50%, -20%) rotateZ(-60deg);
 
   
   &:before {
     position: absolute;
-    right: 30%;
+    right: 18%;
     bottom: 0;
     
     content: ' ';
-    width: 30px;
-    height: 30px;
+    width: 10px;
+    height: 10px;
     background-color: mediumaquamarine;
     border-radius: 50%;
   }

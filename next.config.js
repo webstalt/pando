@@ -1,7 +1,9 @@
+const baseUrl = process.env.IS_DEVELOPMENT ? '' : '/pando'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: '/pipe',
-  assetPrefix: '/pipe',
+  basePath: baseUrl,
+  assetPrefix: baseUrl,
   reactStrictMode: true,
   env: {
     API_URL: 'http://localhost:4200',
