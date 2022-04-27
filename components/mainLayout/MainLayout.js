@@ -7,7 +7,7 @@ export function MainLayout({ children, title = '' }) {
   return (
     <>
       <Head>
-        <title>{title} | Pipe</title>
+        <title>{title} | Pando Finance</title>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css"

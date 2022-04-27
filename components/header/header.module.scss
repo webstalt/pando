@@ -1,17 +1,23 @@
 
 .header {
     display: flex;
+    justify-content: space-between;
     padding-top: 30px;
     padding-bottom: 30px;
   }
   
   .logo {
+    display: flex;
+    align-items: center;
+    
+    width: 160px;
     margin-right: 30%;
   }
   
   .navigation {
     display: flex;
     width: 100%;
+    gap: 14px;
     justify-content: space-between;
     margin-left: auto;
     align-items: center;

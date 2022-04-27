@@ -1,7 +1,6 @@
 import ScrollAnimation from 'react-animate-on-scroll'
 import { Button } from '../button/Button'
 
-import { Name } from '../name/Name'
 import classes from './helloScreen.module.scss'
 
 export function HelloScreen() {
@@ -17,9 +16,7 @@ export function HelloScreen() {
         animateIn="fadeInUp"
         animateOnce={true}
         duration={2}
-      >
-        <Name />
-      </ScrollAnimation>
+      ></ScrollAnimation>
     </div>
   )
 }
