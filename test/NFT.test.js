@@ -4,18 +4,18 @@ require('chai')
     .use(require('chai-as-promised'))
     .should()
 
-contract('NFT', ([deployer, artist, owner1, owner2]) => {
+contract('NFT', ([deployer, company, owner1, owner2]) => {
     const cost = web3.utils.toWei('1', 'ether')
     const royalityFee = 25 // 25%
     let nft
 
     beforeEach(async () => {
         nft = await NFT.new(
-            "Famous Paintings",
-            "PAINT",
-            "ipfs://some_link_here/",
+            "Capital NFT",
+            "CAPITAL",
+            "ipfs://link_to_finance_pdf/",
             royalityFee, // 25%
-            artist // Artist
+            company // company
         )
     })
 
@@ -25,9 +25,9 @@ contract('NFT', ([deployer, artist, owner1, owner2]) => {
             result.should.equal(deployer)
         })
 
-        it('returns the artist', async () => {
-            const result = await nft.artist()
-            result.should.equal(artist)
+        it('returns the company', async () => {
+            const result = await nft.company()
+            result.should.equal(company)
         })
 
         it('returns the royality fee', async () => {
@@ -74,17 +74,17 @@ contract('NFT', ([deployer, artist, owner1, owner2]) => {
             // Approve sale
             await nft.approve(owner2, 1, { from: owner1 })
 
-            const artistBalanceBefore = await web3.eth.getBalance(artist)
+            const companyBalanceBefore = await web3.eth.getBalance(company)
             const owner1BalanceBefore = await web3.eth.getBalance(owner1)
 
             // Initiate transfer
             await nft.transferFrom(owner1, owner2, 1, { from: owner2, value: salePrice })
 
-            const artistBalanceAfter = await web3.eth.getBalance(artist)
+            const companyBalanceAfter = await web3.eth.getBalance(company)
             const owner1BalanceAfter = await web3.eth.getBalance(owner1)
 
             // If balances update, we know owner2 paid
-            artistBalanceAfter.toString().should.equal((Number(artistBalanceBefore) + totalRoyality).toString())
+            companyBalanceAfter.toString().should.equal((Number(companyBalanceBefore) + totalRoyality).toString())
             owner1BalanceAfter.toString().should.equal((Number(owner1BalanceBefore) + (salePrice - totalRoyality)).toString())
         })
     })

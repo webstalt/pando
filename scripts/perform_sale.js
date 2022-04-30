@@ -2,7 +2,7 @@ const NFT = artifacts.require("./NFT");
 
 module.exports = async function (callback) {
 
-    const [deployer, artist, owner1, owner2] = await web3.eth.getAccounts()
+    const [deployer, company, owner1, owner2] = await web3.eth.getAccounts()
     const mintPrice = web3.utils.toWei('1', 'ether')
     const salePrice = web3.utils.toWei('10', 'ether')
 
@@ -11,12 +11,12 @@ module.exports = async function (callback) {
     console.log(`NFT Collection Fetched\n`)
 
     let deployerBalance = await web3.eth.getBalance(deployer)
-    let artistBalance = await web3.eth.getBalance(artist)
+    let companyBalance = await web3.eth.getBalance(company)
     let owner1Balance = await web3.eth.getBalance(owner1)
     let owner2Balance = await web3.eth.getBalance(owner2)
 
     console.log(`Initial balance of deployer | ${web3.utils.fromWei(deployerBalance.toString(), 'ether')}`)
-    console.log(`Initial balance of artist   | ${web3.utils.fromWei(artistBalance.toString(), 'ether')}`)
+    console.log(`Initial balance of company   | ${web3.utils.fromWei(companyBalance.toString(), 'ether')}`)
     console.log(`Initial balance of owner1   | ${web3.utils.fromWei(owner1Balance.toString(), 'ether')}`)
     console.log(`Initial balance of owner2   | ${web3.utils.fromWei(owner2Balance.toString(), 'ether')}\n`)
 
@@ -27,12 +27,12 @@ module.exports = async function (callback) {
     console.log(`NFT has been minted!\n`)
 
     deployerBalance = await web3.eth.getBalance(deployer)
-    artistBalance = await web3.eth.getBalance(artist)
+    companyBalance = await web3.eth.getBalance(company)
     owner1Balance = await web3.eth.getBalance(owner1)
     owner2Balance = await web3.eth.getBalance(owner2)
 
     console.log(`Balance of deployer | ${web3.utils.fromWei(deployerBalance.toString(), 'ether')}`)
-    console.log(`Balance of artist   | ${web3.utils.fromWei(artistBalance.toString(), 'ether')}`)
+    console.log(`Balance of company   | ${web3.utils.fromWei(companyBalance.toString(), 'ether')}`)
     console.log(`Balance of owner1   | ${web3.utils.fromWei(owner1Balance.toString(), 'ether')}`)
     console.log(`Balance of owner2   | ${web3.utils.fromWei(owner2Balance.toString(), 'ether')}\n`)
 
@@ -44,12 +44,12 @@ module.exports = async function (callback) {
     console.log(`Transfer complete!\n`)
 
     deployerBalance = await web3.eth.getBalance(deployer)
-    artistBalance = await web3.eth.getBalance(artist)
+    companyBalance = await web3.eth.getBalance(company)
     owner1Balance = await web3.eth.getBalance(owner1)
     owner2Balance = await web3.eth.getBalance(owner2)
 
     console.log(`Balance of deployer | ${web3.utils.fromWei(deployerBalance.toString(), 'ether')}`)
-    console.log(`Balance of artist   | ${web3.utils.fromWei(artistBalance.toString(), 'ether')}`)
+    console.log(`Balance of company   | ${web3.utils.fromWei(companyBalance.toString(), 'ether')}`)
     console.log(`Balance of owner1   | ${web3.utils.fromWei(owner1Balance.toString(), 'ether')}`)
     console.log(`Balance of owner2   | ${web3.utils.fromWei(owner2Balance.toString(), 'ether')}\n`)
 
