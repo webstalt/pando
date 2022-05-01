@@ -7,9 +7,11 @@ export function HelloScreen() {
   return (
     <div className={classes.wrapper}>
       <div className={classes.content}>
-        <div className={classes.description}>
-          Unlock value from your smart contracts
-        </div>
+        <ScrollAnimation initiallyVisible={true} animateIn="pulse">
+          <div className={classes.description}>
+            Unlock value from your smart contracts
+          </div>
+        </ScrollAnimation>
         <div className={classes.description2}>
           Smart contracts are changing the world.
           <br />
@@ -32,13 +34,6 @@ export function HelloScreen() {
         <Button title="For companies">Sell Revenue Stream</Button>
         <Button title="For investors">Buy Revenue Stream</Button>
       </div>
-      <ScrollAnimation
-        initiallyVisible={true}
-        animatePreScroll={true}
-        animateIn="fadeInUp"
-        animateOnce={false}
-        duration={1.5}
-      ></ScrollAnimation>
     </div>
   )
 }
