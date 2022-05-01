@@ -35,19 +35,5 @@
   text-align: center;
   color: white;
   background-color: rgb(4, 19, 23);
-  animation: textColor 10s ease infinite;
   @include backlight(0, 0, 15vw, 0.75, #0fffc1, #7e0fff, 10s);
-
-    
-  @keyframes textColor {
-    0% {
-      color: white;
-    }
-    50% {
-      color: #0fffc1;
-    }
-    100% {
-      color: white;
-    }
-  }
 }

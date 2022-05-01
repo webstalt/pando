@@ -7,20 +7,30 @@ export function HelloScreen() {
   return (
     <div className={classes.wrapper}>
       <div className={classes.content}>
-        {/* <h1 className={classes.heading}>Pando Finance</h1> */}
         <div className={classes.description}>
-          Enabling trade in a trustless economy
+          Unlock value from your smart contracts
         </div>
         <div className={classes.description2}>
-          Unlock the value in your smart contracts
-        </div>
-        <div className={classes.description2}>
-          Fast, flexible, non-dilutive capital
+          Smart contracts are changing the world.
+          <br />
+          Pando Finance turns your future smart contract revenue into a
+          tradeable asset.
+          <br />
+          Our marketplace allows projects to
+          <span className={classes.highlight}>
+            {' '}
+            sell specific periods of future revenue to investors
+          </span>
+          .
+          <br />
+          <br />
+          Raise capital, reduce risk, and form partnerships without having to
+          sell equity.
         </div>
       </div>
       <div className={classes.buttons}>
-        <Button>Mint now</Button>
-        <Button>Start earning</Button>
+        <Button title="For companies">Sell Revenue Stream</Button>
+        <Button title="For investors">Buy Revenue Stream</Button>
       </div>
       <ScrollAnimation
         initiallyVisible={true}

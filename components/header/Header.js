@@ -130,16 +130,9 @@ export function Header() {
         <Logo />
       </div>
       <div className={classes.navigation}>
-        <StyledLink href="/" className={classes.navigationItem}>
+        {/* <StyledLink href="/" className={classes.navigationItem}>
           Main
-        </StyledLink>
-        <StyledLink href="/" className={classes.navigationItem}>
-          For companies
-        </StyledLink>
-        <StyledLink href="/" className={classes.navigationItem}>
-          For investors
-        </StyledLink>
-
+        </StyledLink> */}
         {showConnect ? (
           <Button
             onClick={connectWalletButtonClickHandler}
