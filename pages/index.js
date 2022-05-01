@@ -1,13 +1,13 @@
 import { MainLayout } from '../components/mainLayout/MainLayout'
 import { HelloScreen } from '../components/helloScreen/HelloScreen'
 import { MintingScreen } from '../components/mintingScreen/MintingScreen'
-import { ForEveryoneScreen } from '../components/forEveryoneScreen/ForEveryoneScreen'
+import { FeaturesScreen } from '../components/featuresScreen/FeaturesScreen'
 
 export default function Index() {
   return (
     <MainLayout title="Main page">
       <HelloScreen />
-      <ForEveryoneScreen />
+      <FeaturesScreen />
       {/* <MintingScreen /> */}
     </MainLayout>
   )
