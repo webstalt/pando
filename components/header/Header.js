@@ -113,7 +113,7 @@ export function Header() {
   //Copy user address to clipboard
   function copyAddressToClipboard() {
     navigator.clipboard.writeText(address)
-    console.log("User address copied to clipboard")
+    console.log('User address copied to clipboard')
   }
 
   //const copyToClipboardToast = () => {} // added to escape the error
@@ -133,8 +133,12 @@ export function Header() {
         <StyledLink href="/" className={classes.navigationItem}>
           Main
         </StyledLink>
-        <StyledLink href="/about">About</StyledLink>
-        <StyledLink href="/contacts">Contacts</StyledLink>
+        <StyledLink href="/" className={classes.navigationItem}>
+          For companies
+        </StyledLink>
+        <StyledLink href="/" className={classes.navigationItem}>
+          For investors
+        </StyledLink>
 
         {showConnect ? (
           <Button
@@ -146,10 +150,7 @@ export function Header() {
         ) : (
           <div className="button_connect_switched">
             {switchNetwork ? (
-              <Button
-                className="button_network"
-                onClick={switchNetworkHandler}
-              >
+              <Button className="button_network" onClick={switchNetworkHandler}>
                 Switch Network
               </Button>
             ) : (
