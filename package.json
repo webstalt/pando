@@ -15,9 +15,12 @@
   "dependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-react": "^7.16.7",
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
     "next": "12.1.5",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "web3": "^1.7.3"
   },
   "devDependencies": {
     "concurrently": "^7.1.0",
