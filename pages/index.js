@@ -7,8 +7,8 @@ export default function Index() {
   return (
     <MainLayout title="Main page">
       <HelloScreen />
+      <MintingScreen />
       <FeaturesScreen />
-      {/* <MintingScreen /> */}
     </MainLayout>
   )
 }
