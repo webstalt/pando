@@ -1,25 +1,28 @@
+import { useState, useEffect } from 'react'
+import Web3 from 'web3'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { setIsWalletConnected } from '../../app/user/userSlice'
+import stakingContract from '../../blockchain/contract.js'
 import { StyledLink } from '../styledLink/StyledLink'
 import { Button } from '../button/Button'
 import { Logo } from '../logo/Logo'
 
 import classes from './header.module.scss'
 
-import Web3 from 'web3'
-import stakingContract from '../../blockchain/contract.js'
-import { useState, useEffect } from 'react'
-
 export function Header() {
   /* ---------Web3--------- */
   const [web3, setWeb3] = useState({})
   const [address, setAddress] = useState({})
   const [vmContract, setVmContract] = useState(null)
-  const [showConnect, setShowConnect] = useState(true)
+  const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
   const [switchNetwork, setSwitchNetwork] = useState(true)
+  const dispatch = useDispatch()
 
   /* ---------UseEffects--------- */
   //Run these functions if either address or vmContract changes.
   useEffect(() => {
-    if (vmContract && address) setShowConnect(false)
+    if (vmContract && address) dispatch(setIsWalletConnected(true))
   }, [vmContract, address])
 
   const connectWalletHandler = async () => {
@@ -73,7 +76,7 @@ export function Header() {
       console.log('Account changed to:', accounts[0])
       //Check if a user has disconnected all addresses from the website
       if (accounts[0] == null) {
-        setShowConnect(true)
+        dispatch(setIsWalletConnected(false))
         console.log('User disconnected all addresses')
       }
     })
@@ -133,7 +136,7 @@ export function Header() {
         {/* <StyledLink href="/" className={classes.navigationItem}>
           Main
         </StyledLink> */}
-        {showConnect ? (
+        {!isWalletConnected ? (
           <Button
             onClick={connectWalletButtonClickHandler}
             className="button_connect"

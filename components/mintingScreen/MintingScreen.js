@@ -34,15 +34,28 @@ export function MintingScreen({ data }) {
         >
           {({ isSubmitting }) => (
             <Form className={classes.form}>
-              <Field className={classes.inputField} type="name" name="name" />
+              <label className={classes.label} htmlFor="name">
+                Name
+                <Field className={classes.inputField} type="name" name="name" />
+              </label>
               <ErrorMessage name="name" component="div" />
-              <Field className={classes.inputField} type="price" name="price" />
+              <label className={classes.label} htmlFor="price">
+                Price
+                <Field
+                  className={classes.inputField}
+                  type="price"
+                  name="price"
+                />
+              </label>
               <ErrorMessage name="price" component="div" />
-              <Field
-                className={classes.inputField}
-                type="royalty"
-                name="royalty"
-              />
+              <label className={classes.label} htmlFor="royalty">
+                Royalty
+                <Field
+                  className={classes.inputField}
+                  type="royalty"
+                  name="royalty"
+                />
+              </label>
               <ErrorMessage name="royalty" component="div" />
               <Button type="submit" disabled={isSubmitting}>
                 Submit

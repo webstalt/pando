@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import userReducer from '../components/mintingScreen/sellerView/sellerSlice'
+import userReducer from '../app/user/userSlice'
 
 export function makeStore() {
   return configureStore({

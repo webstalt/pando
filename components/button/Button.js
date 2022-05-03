@@ -1,8 +1,8 @@
 import classes from './button.module.scss'
 
-export function Button({ children, onClick, title }) {
+export function Button({ children, ...rest }) {
   return (
-    <button className={classes.button} onClick={onClick} title={title}>
+    <button {...rest} className={classes.button}>
       {children}
     </button>
   )
