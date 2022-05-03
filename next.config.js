@@ -5,6 +5,10 @@ const nextConfig = {
   basePath: baseUrl,
   assetPrefix: baseUrl,
   reactStrictMode: true,
+  images: {
+    loader: 'akamai',
+    path: baseUrl,
+  },
   env: {
     API_URL: 'http://localhost:4200',
   },
