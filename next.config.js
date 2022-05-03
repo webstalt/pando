@@ -3,7 +3,7 @@ const baseUrl = process.env.IS_DEVELOPMENT ? '' : '/pando'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: baseUrl,
-  assetPrefix: baseUrl,
+  assetPrefix: '',
   reactStrictMode: true,
   images: {
     loader: 'akamai',
