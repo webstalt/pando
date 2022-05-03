@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     loader: 'akamai',
-    path: '',
+    path: baseUrl,
   },
   env: {
     API_URL: 'http://localhost:4200',
