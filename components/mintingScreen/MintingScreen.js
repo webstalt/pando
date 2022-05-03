@@ -1,12 +1,16 @@
 import Image from 'next/image'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { useSelector } from 'react-redux'
 
 import { Button } from '../button/Button'
+import { ConnectWalletButton } from '../connectWalletButton/ConnectWalletButton'
 import { Backlight } from '../backlight/Backlight'
 import classes from './mintingScreen.module.scss'
 import conceptMap from './concept-map.jpg'
 
 export function MintingScreen({ data }) {
+  const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
+
   return (
     <Backlight>
       <div className={classes.content}>
@@ -57,9 +61,13 @@ export function MintingScreen({ data }) {
                 />
               </label>
               <ErrorMessage name="royalty" component="div" />
-              <Button type="submit" disabled={isSubmitting}>
-                Submit
-              </Button>
+              {isWalletConnected ? (
+                <Button type="submit" disabled={isSubmitting}>
+                  Submit
+                </Button>
+              ) : (
+                <ConnectWalletButton />
+              )}
             </Form>
           )}
         </Formik>
