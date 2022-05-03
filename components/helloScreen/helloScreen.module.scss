@@ -14,6 +14,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  text-align: center;
 }
 
 .description {    
@@ -38,4 +40,12 @@
   display: flex;
   gap: 20px;
   font-size: 20px;
+}
+
+
+    
+@media screen and (max-width: 600px) {
+  .buttons {
+    flex-direction: column;
+  }
 }

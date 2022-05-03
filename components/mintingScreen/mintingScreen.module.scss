@@ -1,3 +1,59 @@
+.content {
+  min-height: 50vh;
+  padding: 100px 50px;
+}
+
+.heading {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.optionsWrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.inputField {
+  --color: mediumaquamarine;
+  --hover: #{adjust-hue(mediumaquamarine, 45deg)};
+
+  width: 100%;
+  padding: 1em 1.5em;
+
+  background-color: transparent;
+  color: white;
+  line-height: 20px;
+
+  border: 2px solid var(--color);
+  border-radius: 8px;
+
+  &:focus {
+    border-color: white;
+
+    outline: none;
+  }
+}
+
 .table {
   display: flex;
   flex-direction: column;
