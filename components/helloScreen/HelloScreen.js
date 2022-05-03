@@ -1,9 +1,13 @@
 import ScrollAnimation from 'react-animate-on-scroll'
+import { useDispatch } from 'react-redux'
 import { Button } from '../button/Button'
+import { Roles, setRole } from '../../app/user/userSlice'
 
 import classes from './helloScreen.module.scss'
 
 export function HelloScreen() {
+  const dispatch = useDispatch()
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.content}>
@@ -31,8 +35,18 @@ export function HelloScreen() {
         </div>
       </div>
       <div className={classes.buttons}>
-        <Button title="For companies">Sell Revenue Stream</Button>
-        <Button title="For investors">Buy Revenue Stream</Button>
+        <Button
+          title="For companies"
+          onClick={() => dispatch(setRole(Roles.SELLER))}
+        >
+          Sell Revenue Stream
+        </Button>
+        <Button
+          title="For investors"
+          onClick={() => dispatch(setRole(Roles.INVESTOR))}
+        >
+          Buy Revenue Stream
+        </Button>
       </div>
     </div>
   )

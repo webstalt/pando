@@ -1,7 +1,19 @@
 .content {
   min-height: 50vh;
   padding: 100px 50px;
+}
 
+.heading {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.optionsWrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.option {
   display: flex;
   flex-direction: column;
 }

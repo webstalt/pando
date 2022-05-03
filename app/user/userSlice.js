@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+export const Roles = {
+  SELLER: 'seller',
+  INVESTOR: 'investor',
+}
+
 const initialState = {
   isWalletConnected: false,
+  role: null,
 }
 
 export const userSlice = createSlice({
@@ -12,8 +18,11 @@ export const userSlice = createSlice({
     setIsWalletConnected: (state, action) => {
       state.isWalletConnected = action.payload
     },
+    setRole: (state, action) => {
+      state.role = action.payload
+    },
   },
 })
 
-export const { setIsWalletConnected } = userSlice.actions
+export const { setIsWalletConnected, setRole } = userSlice.actions
 export default userSlice.reducer
