@@ -110,7 +110,13 @@ export function Header() {
     }
   }
 
-  const copyToClipboardToast = () => {} // added to escape the error
+  //Copy user address to clipboard
+  function copyAddressToClipboard() {
+    navigator.clipboard.writeText(address)
+    console.log("User address copied to clipboard")
+  }
+
+  //const copyToClipboardToast = () => {} // added to escape the error
 
   const connectWalletButtonClickHandler = async () => {
     await connectWalletHandler()
@@ -133,23 +139,23 @@ export function Header() {
         {showConnect ? (
           <Button
             onClick={connectWalletButtonClickHandler}
-            className="nav_button_connect"
+            className="button_connect"
           >
             Connect Wallet
           </Button>
         ) : (
-          <div className="nav_button_connect_switched">
+          <div className="button_connect_switched">
             {switchNetwork ? (
               <Button
-                className="nav_button_network"
+                className="button_network"
                 onClick={switchNetworkHandler}
               >
                 Switch Network
               </Button>
             ) : (
               <Button
-                onClick={copyToClipboardToast}
-                className="nav_button_address"
+                onClick={copyAddressToClipboard}
+                className="button_address"
               >
                 {address
                   .substring(0, 5)
