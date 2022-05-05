@@ -26,11 +26,7 @@ export function MintingScreen({ data }) {
             <div className={classes.optionsWrapper}>
               <div className={classes.option}>
                 <Image
-                  src={
-                    process.env.IS_DEVELOPMENT
-                      ? sellersRoadmap
-                      : `/pando/${sellersRoadmap}`
-                  }
+                  src={sellersRoadmap}
                   alt="project-roadmap"
                   height="500"
                   width="250"
@@ -41,11 +37,7 @@ export function MintingScreen({ data }) {
               </div>
               <div className={classes.option}>
                 <Image
-                  src={
-                    process.env.IS_DEVELOPMENT
-                      ? investorsRoadmap
-                      : `/pando/${investorsRoadmap}`
-                  }
+                  src={investorsRoadmap}
                   alt="investors-roadmap"
                   height="320"
                   width="250"
