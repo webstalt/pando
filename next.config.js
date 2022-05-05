@@ -9,7 +9,7 @@ const nextConfig = withImages({
   reactStrictMode: true,
   images: {
     disableStaticImages: true,
-    loader: 'akamai',
+    loader: 'imgix',
     basePath: '',
   },
   env: {

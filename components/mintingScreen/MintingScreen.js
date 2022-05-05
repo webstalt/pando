@@ -8,7 +8,6 @@ import { Button } from '../button/Button'
 import { Backlight } from '../backlight/Backlight'
 import { SellerView } from './sellerView/SellerView'
 
-
 import classes from './mintingScreen.module.scss'
 
 export function MintingScreen({ data }) {
@@ -28,7 +27,7 @@ export function MintingScreen({ data }) {
               <div className={classes.option}>
                 <Image
                   src={sellersRoadmap}
-                  alt="sellers-roadmap"
+                  alt="project-roadmap"
                   height="500"
                   width="250"
                 />
