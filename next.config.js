@@ -10,7 +10,7 @@ const nextConfig = withImages({
   images: {
     disableStaticImages: true,
     loader: 'akamai',
-    path: '',
+    basePath: '',
   },
   env: {
     API_URL: 'http://localhost:4200',
