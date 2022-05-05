@@ -16,7 +16,7 @@
     filter: blur($spread);
     background: linear-gradient(270deg, $colorA, $colorB);
     background-size: 200% 200%;
-    animation: animateGlow $duration ease infinite;
+    // animation: animateGlow $duration ease infinite;
     
     @keyframes animateGlow {
       0%{background-position:0% 50%}
