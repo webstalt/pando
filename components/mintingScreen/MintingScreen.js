@@ -25,23 +25,13 @@ export function MintingScreen({ data }) {
             </div>
             <div className={classes.optionsWrapper}>
               <div className={classes.option}>
-                <Image
-                  src={sellersRoadmap}
-                  alt="project-roadmap"
-                  height="500"
-                  width="250"
-                />
+                <div className={classes.sellerRoadmap}></div>
                 <Button onClick={() => dispatch(setRole(Roles.SELLER))}>
                   Continue as a project
                 </Button>
               </div>
               <div className={classes.option}>
-                <Image
-                  src={investorsRoadmap}
-                  alt="investors-roadmap"
-                  height="320"
-                  width="250"
-                />
+                <div className={classes.investorsRoadmap}></div>
                 <Button onClick={() => dispatch(setRole(Roles.INVESTOR))}>
                   Become an investor
                 </Button>
