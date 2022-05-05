@@ -10,7 +10,7 @@ const nextConfig = withImages({
   images: {
     disableStaticImages: true,
     loader: 'imgix',
-    path: '/public',
+    path: baseUrl,
   },
   env: {
     API_URL: 'http://localhost:4200',
