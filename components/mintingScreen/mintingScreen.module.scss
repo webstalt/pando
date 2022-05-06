@@ -18,6 +18,26 @@
   flex-direction: column;
 }
 
+//Seller Roadmap image
+.sellerRoadmap{
+  height: 550px;
+  width: 250px;
+  background-image: url("../../public/sellers-roadmap.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+}
+
+//Investor Roadmap image
+.investorsRoadmap{
+  height: 320px;
+  width: 250px;
+  background-image: url('../../public/investors-roadmap.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+
 // .table {
 //   display: flex;
 //   flex-direction: column;
