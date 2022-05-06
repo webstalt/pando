@@ -9,6 +9,8 @@ const nextConfig = withImages({
   reactStrictMode: true,
   images: {
     disableStaticImages: true,
+    loader: 'imgix',
+    path: '',
   },
   env: {
     API_URL: 'http://localhost:4200',
