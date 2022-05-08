@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Web3 from 'web3'
 
 import { setIsWalletConnected } from '../../app/user/userSlice'
-import stakingContract from '../../blockchain/contract.js'
+import mintNFTContract from '../../blockchain/contract.js'
 import { Button } from '../button/Button'
 
 export function ConnectWalletButton() {
@@ -37,14 +37,14 @@ export function ConnectWalletButton() {
         setAddress(accounts[0])
         //console.log("Account address set")
 
-        const vm = stakingContract(web3)
+        const vm = mintNFTContract(web3)
         setVmContract(vm)
 
-        if (window.ethereum.networkVersion == '4') {
-          //TODO: Change chain ID, currently set to Rinkeby network
+        if (window.ethereum.networkVersion == '3') {
+          //TODO: Change chain ID, currently set to Ropsten Test network
           console.log(
-            window.ethereum.networkVersion,
-            'window.ethereum.networkVersion'
+            'window.ethereum.networkVersion',
+             window.ethereum.networkVersion
           )
           setSwitchNetwork(false)
         } else {
@@ -79,10 +79,11 @@ export function ConnectWalletButton() {
 
   //Event listener for chainId changes
   const chainChangedListener = async () => {
-    //console.log("chainChangedListener Called: ", window.ethereum.networkVersion)
+    console.log("chainChangedListener Called: ", window.ethereum.networkVersion)
+    
     ethereum.on('chainChanged', (chainId) => {
-      //console.log("Inner chain:", chainId)
-      if (chainId != '0x4') {
+      console.log("Inner chain:", chainId)
+      if (chainId != '0x3') { //TODO: Change before deployment
         setSwitchNetwork(true)
         console.log('setting Switch Network to True')
       } else {
@@ -97,10 +98,10 @@ export function ConnectWalletButton() {
     try {
       const result = await ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x4' }], //TODO: Change before deployment
+        params: [{ chainId: '0x3' }], //TODO: Change before deployment
       })
       if (result == null) {
-        //console.log("Network Set to Rinkeby") //TODO: Change before deployment
+        //console.log("Network Set to Ropsten") //TODO: Change before deployment
         setSwitchNetwork(false)
       }
     } catch (err) {

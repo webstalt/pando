@@ -10,6 +10,10 @@ import classes from './sellerView.module.scss'
 export function SellerView() {
   const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
 
+  const mintNFT = async() =>{
+    console.log("minting...")
+  }
+
   return (
     <>
       <ProgressBar
@@ -102,9 +106,9 @@ export function SellerView() {
               component="div"
             />
             {isWalletConnected ? (
-              <Button type="submit" disabled={isSubmitting}>
+              <button type="submit" disabled={isSubmitting} onClick ={mintNFT}>
                 Submit
-              </Button>
+              </button>
             ) : (
               <ConnectWalletButton />
             )}
