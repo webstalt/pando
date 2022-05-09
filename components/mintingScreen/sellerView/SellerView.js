@@ -7,11 +7,49 @@ import { ProgressBar, Step } from 'react-step-progress-bar'
 import { ConnectWalletButton } from '../../connectWalletButton/ConnectWalletButton'
 import classes from './sellerView.module.scss'
 
+import { pinJSONToIPFS } from "./pinata.js";
+
+require('dotenv').config();
+const key = process.env.REACT_APP_PINATA_KEY;
+const secret = process.env.REACT_APP_PINATA_SECRET;
+
 export function SellerView() {
   const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
 
-  const mintNFT = async() =>{
-    console.log("minting...")
+  const mintNFT = async(name, price, royalty) => {
+    //console.log(name,price,royalty)
+    console.log(key,secret)
+    const metadata = new Object();
+    metadata.name = name;
+    metadata.image = "google.com"; //TODO
+    metadata.description = royalty;
+
+    const pinataResponse = await pinJSONToIPFS(metadata);
+    if (!pinataResponse.success) {
+      return {
+        success: false,
+        status: "😢 Something went wrong while uploading your tokenURI.",
+      };
+    }
+    const tokenURI = pinataResponse.pinataUrl;
+
+    // Make call to smart contract to mint NFT
+    try {
+      const gasPrice = await web3.eth.getGasPrice();
+      gasPrice = parseInt(gasPrice)
+
+      const result = await vmContract.methods.mintNFT().send({
+          from: address,
+          gasPrice: gasPrice,
+          recipient: address, //TODO: Possibly allow the user to change the recipient? Currently the recipient is the same as the minter.
+          tokenURI: tokenURI
+      })
+      console.log(result)
+  } catch (err) {
+      console.log(err)
+  }
+
+
   }
 
   return (
@@ -66,10 +104,7 @@ export function SellerView() {
         }}
         onSubmit={(values, { setSubmitting }) => {
           // TODO: here will be a callback that sends data
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            setSubmitting(false)
-          }, 400)
+          mintNFT(values.name, values.price, values.royalty)
         }}
       >
         {({ isSubmitting }) => (
@@ -106,7 +141,7 @@ export function SellerView() {
               component="div"
             />
             {isWalletConnected ? (
-              <button type="submit" disabled={isSubmitting} onClick ={mintNFT}>
+              <button type="submit" disabled={isSubmitting} >
                 Submit
               </button>
             ) : (

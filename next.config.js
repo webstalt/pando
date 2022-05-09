@@ -1,5 +1,6 @@
 const baseUrl = process.env.IS_DEVELOPMENT ? '' : '/pando'
 const withImages = require('next-images')
+require("dotenv").config()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withImages({
@@ -15,4 +16,14 @@ const nextConfig = withImages({
   },
 })
 
+module.exports ={
+  env:{
+    key: process.env.REACT_APP_PINATA_KEY,
+    secret: process.env.REACT_APP_PINATA_SECRET
+  },
+};
+
+
 module.exports = nextConfig
+
+
