@@ -9,19 +9,20 @@ import classes from './sellerView.module.scss'
 
 import { pinJSONToIPFS } from "./pinata.js";
 
-require('dotenv').config();
+//require('dotenv').config();
+require('dotenv').config()
 const key = process.env.REACT_APP_PINATA_KEY;
 const secret = process.env.REACT_APP_PINATA_SECRET;
+
 
 export function SellerView() {
   const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
 
   const mintNFT = async(name, price, royalty) => {
-    //console.log(name,price,royalty)
-    console.log(key,secret)
+    console.log(key,secret, process.env.REACT_APP_TEST)
     const metadata = new Object();
-    metadata.name = name;
-    metadata.image = "google.com"; //TODO
+    metadata.name = "RoyaltyNFT1 " + name;
+    metadata.image = "https://gateway.pinata.cloud/ipfs/QmcQSgUvy1hLtqioBXDe2g4c6hAtKUc1P2Ec8xixAh3E1Z"; //TODO
     metadata.description = royalty;
 
     const pinataResponse = await pinJSONToIPFS(metadata);

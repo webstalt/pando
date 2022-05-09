@@ -16,14 +16,6 @@ const nextConfig = withImages({
   },
 })
 
-module.exports ={
-  env:{
-    key: process.env.REACT_APP_PINATA_KEY,
-    secret: process.env.REACT_APP_PINATA_SECRET
-  },
-};
-
-
 module.exports = nextConfig
 
 
