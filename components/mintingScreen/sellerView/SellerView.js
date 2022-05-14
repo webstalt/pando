@@ -12,38 +12,41 @@ export function SellerView() {
 
   return (
     <>
-      <ProgressBar
-        percent={10}
-        filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
-      >
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <div className={classes.stepName}>
-              Complete NFT information form
-            </div>
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <div className={classes.stepName}>Mint NFT</div>
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <div className={classes.stepName}>List NFT royalty for sale</div>
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <div className={classes.stepName}>Accept offer</div>
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <div className={classes.stepName}>Receive funds</div>
-          )}
-        </Step>
-      </ProgressBar>
+      <div className={classes.progressBar}>
+        <ProgressBar
+          width="90%"
+          percent={100}
+          filledBackground="linear-gradient(to right, #66a3cd, mediumaquamarine)"
+        >
+          <Step transition="scale" position={0}>
+            {({ accomplished }) => (
+              <div className={classes.stepName}>
+                Complete NFT information form
+              </div>
+            )}
+          </Step>
+          <Step transition="scale" position={25}>
+            {({ accomplished }) => (
+              <div className={classes.stepName}>Mint NFT</div>
+            )}
+          </Step>
+          <Step transition="scale" position={50}>
+            {({ accomplished }) => (
+              <div className={classes.stepName}>List NFT royalty for sale</div>
+            )}
+          </Step>
+          <Step transition="scale" position={76}>
+            {({ accomplished }) => (
+              <div className={classes.stepName}>Accept offer</div>
+            )}
+          </Step>
+          <Step transition="scale" position={100}>
+            {({ accomplished }) => (
+              <div className={classes.stepName}>Receive funds</div>
+            )}
+          </Step>
+        </ProgressBar>
+      </div>
       <h3 className={classes.stepTitle}>Fill NFT information form</h3>
       <Formik
         initialValues={{ name: '', royalty: '', price: '' }}

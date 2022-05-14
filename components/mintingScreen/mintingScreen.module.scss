@@ -1,16 +1,17 @@
 .content {
   min-height: 50vh;
-  padding: 100px 50px;
+  padding: 100px 40px;
 }
 
 .heading {
   font-size: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .optionsWrapper {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 30px;
 }
 
 .option {
@@ -18,39 +19,11 @@
   flex-direction: column;
 }
 
-//Seller Roadmap image
-.sellerRoadmap{
-  height: 550px;
-  width: 250px;
-  background-image: url("../../public/sellers-roadmap.png");
+.roadmap {
+  height: 700px;
+  width: 680px;
+  background-image: url('../../public/roadmap.jpeg');
   background-repeat: no-repeat;
   background-size: 100%;
-
+  margin: 0 auto;
 }
-
-//Investor Roadmap image
-.investorsRoadmap{
-  height: 320px;
-  width: 250px;
-  background-image: url('../../public/investors-roadmap.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
-
-// .table {
-//   display: flex;
-//   flex-direction: column;
-//   width: 100%;
-//   border: 1px solid mediumaquamarine;
-//   justify-content: space-around;
-// }
-
-// .row {
-//   display: flex;
-// }
-
-// .cell {
-//   border: 1px solid mediumaquamarine;
-//   flex: 1;
-// }

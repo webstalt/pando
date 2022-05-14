@@ -1,7 +1,12 @@
+.progressBar {
+  display: flex;
+  justify-content: center;
+}
+
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   width: 50%;
   margin: 0 auto;
 }
@@ -11,6 +16,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
+  margin-top: 10px;
 }
 
 .inputField {
@@ -41,11 +47,11 @@
 }
 
 .stepName {
-  max-width: 150px;
+  max-width: 130px;
   margin-top: 50px;
 }
 
 .stepTitle {
   margin: 30px 0;
-  padding-top: 16px;
+  padding-top: 36px;
 }
