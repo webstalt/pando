@@ -4,6 +4,10 @@ import { ProgressBar, Step } from 'react-step-progress-bar'
 import { useEffect, useState } from 'react'
 
 import { Step1 } from './step1/Step1'
+import { Step2 } from './step2/Step2'
+import { Step3 } from './step3/Step3'
+import { Step4 } from './step4/Step4'
+import { Step5 } from './step5/Step5'
 import classes from './sellerView.module.scss'
 
 const Steps = [0, 1, 2, 3, 4]
@@ -63,8 +67,15 @@ export function SellerView() {
         </ProgressBar>
       </div>
       {currentStep === Steps[0] && (
-        <Step1 isWalletConnected={isWalletConnected} forwardToCheckOffers={() => setCurrentStep(Steps[3])} />
+        <Step1
+          isWalletConnected={isWalletConnected}
+          forwardToCheckOffers={() => setCurrentStep(Steps[3])}
+        />
       )}
+      {currentStep === Steps[1] && <Step2 />}
+      {currentStep === Steps[2] && <Step3 />}
+      {currentStep === Steps[3] && <Step4 />}
+      {currentStep === Steps[4] && <Step5 />}
     </>
   )
 }
