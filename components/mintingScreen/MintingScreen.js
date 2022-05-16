@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Roles, setRole } from '../../app/user/userSlice'
 import { Button } from '../button/Button'
 import { Backlight } from '../backlight/Backlight'
-import { SellerView } from './sellerView/SellerView'
 
+import { SellerView } from './sellerView/SellerView'
+import { InvestorView } from './investorView/InvestorView'
 import classes from './mintingScreen.module.scss'
 
 const MintingScreenComponent = ({ data }, ref) => {
@@ -38,7 +39,9 @@ const MintingScreenComponent = ({ data }, ref) => {
           </>
         ) : role === Roles.SELLER ? (
           <SellerView />
-        ) : null}
+        ) : (
+          <InvestorView />
+        )}
       </div>
     </Backlight>
   )

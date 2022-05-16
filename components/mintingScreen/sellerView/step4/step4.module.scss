@@ -9,6 +9,10 @@
 
 .row {
   display: flex;
+
+  &:hover {
+    background-color: rgb(49, 49, 49);
+  }
 }
 
 .cell {
