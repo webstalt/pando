@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-
 import 'react-step-progress-bar/styles.css'
 import { ProgressBar, Step } from 'react-step-progress-bar'
 import { useEffect, useState } from 'react'
@@ -7,16 +6,24 @@ import { useEffect, useState } from 'react'
 import { Step1 } from './step1/Step1'
 import classes from './sellerView.module.scss'
 
+const Steps = [0, 1, 2, 3, 4]
+
+const PercentageOfStep = {
+  [Steps[0]]: 0,
+  [Steps[1]]: 25,
+  [Steps[2]]: 50,
+  [Steps[3]]: 75,
+  [Steps[4]]: 100,
+}
+
 export function SellerView() {
   const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
   const [percentageComplete, setPercentageComplete] = useState(0)
-  const isNftFormSubmitted = false
+  const [currentStep, setCurrentStep] = useState(Steps[0])
 
   useEffect(() => {
-    if (isNftFormSubmitted) {
-      setPercentageComplete(25)
-    }
-  }, [isWalletConnected])
+    setPercentageComplete(PercentageOfStep[currentStep])
+  }, [currentStep])
 
   return (
     <>
@@ -55,7 +62,9 @@ export function SellerView() {
           </Step>
         </ProgressBar>
       </div>
-      {!isNftFormSubmitted && <Step1 isWalletConnected={isWalletConnected} />}
+      {currentStep === Steps[0] && (
+        <Step1 isWalletConnected={isWalletConnected} forwardToCheckOffers={() => setCurrentStep(Steps[3])} />
+      )}
     </>
   )
 }

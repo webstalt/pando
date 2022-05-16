@@ -11,7 +11,10 @@
 .optionsWrapper {
   display: flex;
   justify-content: space-around;
+  width: 90%;
   margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .option {
@@ -20,8 +23,8 @@
 }
 
 .roadmap {
-  height: 700px;
-  width: 680px;
+  height: 680px;
+  width: 660px;
   background-image: url('../../public/roadmap.jpeg');
   background-repeat: no-repeat;
   background-size: 100%;

@@ -1,3 +1,4 @@
+import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Roles, setRole } from '../../app/user/userSlice'
@@ -7,14 +8,14 @@ import { SellerView } from './sellerView/SellerView'
 
 import classes from './mintingScreen.module.scss'
 
-export function MintingScreen({ data }) {
+const MintingScreenComponent = ({ data }, ref) => {
   const role = useSelector((state) => state.user.role)
 
   const dispatch = useDispatch()
 
   return (
     <Backlight>
-      <div className={classes.content}>
+      <div className={classes.content} ref={ref}>
         {!role ? (
           <>
             <div className={classes.heading}>
@@ -42,3 +43,5 @@ export function MintingScreen({ data }) {
     </Backlight>
   )
 }
+
+export const MintingScreen = forwardRef(MintingScreenComponent)

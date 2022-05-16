@@ -5,13 +5,11 @@ import { Button } from '../../../button/Button'
 
 import classes from './step1.module.scss'
 
-export function Step1({ isWalletConnected, forwardToCheckOffers }) {
+export function Step2({ isWalletConnected }) {
   return (
     <>
-      <h3 className={classes.stepTitle}>Fill NFT information form</h3>
+      <h3 className={classes.stepTitle}>Mint NFT</h3>
       <Formik
-        validateOnChange={false}
-        validateOnBlur={false}
         initialValues={{ name: '', royalty: '', price: '' }}
         validate={(values) => {
           const errors = {}
@@ -67,22 +65,13 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
               name="royalty"
               component="div"
             />
-
-            <div className={classes.buttonWrapper}>
-              {isWalletConnected ? (
-                <>
-                  <Button type="submit" disabled={isSubmitting}>
-                    Submit
-                  </Button>
-                  <h3 className={classes.checkOffersTitle}>
-                    Already listed NFT royalty?
-                  </h3>
-                  <Button onClick={forwardToCheckOffers}>Check offers</Button>
-                </>
-              ) : (
-                <ConnectWalletButton />
-              )}
-            </div>
+            {isWalletConnected ? (
+              <Button type="submit" disabled={isSubmitting}>
+                Submit
+              </Button>
+            ) : (
+              <ConnectWalletButton />
+            )}
           </Form>
         )}
       </Formik>
