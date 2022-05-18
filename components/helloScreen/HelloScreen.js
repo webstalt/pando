@@ -5,7 +5,7 @@ import { Roles, setRole } from '../../app/user/userSlice'
 
 import classes from './helloScreen.module.scss'
 
-export function HelloScreen() {
+export function HelloScreen({ executeScroll }) {
   const dispatch = useDispatch()
 
   return (
@@ -37,13 +37,19 @@ export function HelloScreen() {
       <div className={classes.buttons}>
         <Button
           title="For companies"
-          onClick={() => dispatch(setRole(Roles.SELLER))}
+          onClick={() => {
+            dispatch(setRole(Roles.SELLER))
+            executeScroll()
+          }}
         >
           Sell Revenue Stream
         </Button>
         <Button
           title="For investors"
-          onClick={() => dispatch(setRole(Roles.INVESTOR))}
+          onClick={() => {
+            dispatch(setRole(Roles.INVESTOR))
+            executeScroll()
+          }}
         >
           Buy Revenue Stream
         </Button>

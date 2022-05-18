@@ -18,6 +18,7 @@
     "@reduxjs/toolkit": "^1.8.1",
     "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
+    "classnames": "^2.3.1",
     "formik": "^2.2.9",
     "next": "12.1.5",
     "next-images": "^1.8.4",

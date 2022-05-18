@@ -22,4 +22,26 @@
     box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
     transform: translateY(-0.25em);
   }
+
+  &:disabled {
+    pointer-events: none;
+    color: gray;
+  }
+
+  &.primary {
+    background-color: var(--color);
+    border-color: var(--color);
+    color: whitesmoke;
+    text-shadow: gray 1px 0 6px;
+    
+    &:hover, &:focus, &:focus-visible, &:focus-within {
+      border-color: #{adjust-hue(mediumaquamarine, 20deg)};
+      background-color: #{adjust-hue(mediumaquamarine, 20deg)};
+    }
+
+    &:disabled {
+      background-color: gray;
+      border-color: gray;
+    }
+  }
 }
