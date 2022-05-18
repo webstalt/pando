@@ -12,7 +12,7 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
       <Formik
         validateOnChange={false}
         validateOnBlur={false}
-        initialValues={{ name: '', royalty: '', price: '' }}
+        initialValues={{ name: '', royalty: '', price: '', nfturi: '' }}
         validate={(values) => {
           const errors = {}
           if (!values.name) {
@@ -23,6 +23,9 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
           }
           if (!values.price) {
             errors.price = 'Required'
+          }
+          if (!values.nfturi) {
+            errors.nfturi = 'Required'
           }
           return errors
         }}
@@ -95,29 +98,22 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
               ) : (
                 <ConnectWalletButton />
               )}
-              <h3 className={classes.checkOffersTitle}>
-                Already listed NFT royalty?
-              </h3>
-              <div>
-                <Button
-                  disabled={!isWalletConnected}
-                  onClick={forwardToCheckOffers}
-                >
-                  Check offers
-                </Button>
-                {!isWalletConnected && (
-                  <span className={classes.hint}>
-                    ?
-                    <span className={classes.hintContent}>
-                      Connect Wallet first
-                    </span>
-                  </span>
-                )}
-              </div>
             </div>
           </Form>
         )}
       </Formik>
+      
+      <h3 className={classes.checkOffersTitle}>Already listed NFT royalty?</h3>
+      <div>
+        <Button disabled={!isWalletConnected} onClick={forwardToCheckOffers}>
+          Check offers
+        </Button>
+        {!isWalletConnected && (
+          <span className={classes.hint}>
+            ?<span className={classes.hintContent}>Connect Wallet first</span>
+          </span>
+        )}
+      </div>
     </>
   )
 }

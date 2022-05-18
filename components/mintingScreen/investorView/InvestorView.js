@@ -59,7 +59,7 @@ export function InvestorView() {
       {currentStep === Steps[0] && (
         <Step1
           isWalletConnected={isWalletConnected}
-          forwardToCheckOffers={() => setCurrentStep(Steps[3])}
+          forwardToCheckOffers={() => setCurrentStep(Steps[2])}
         />
       )}
       {currentStep === Steps[1] && <Step2 />}
