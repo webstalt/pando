@@ -64,6 +64,13 @@ export function InvestorView() {
       )}
       {currentStep === Steps[1] && <Step2 />}
       {currentStep === Steps[2] && <Step3 />}
+
+      <button
+        className={classes.fakeButton}
+        onClick={() => setCurrentStep(currentStep + 1)}
+      >
+        next step
+      </button>
     </>
   )
 }

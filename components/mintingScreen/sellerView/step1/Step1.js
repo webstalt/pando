@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
 import { ConnectWalletButton } from '../../../connectWalletButton/ConnectWalletButton'
-import { Button } from '../../../button/Button'
+import { Button, Variants } from '../../../button/Button'
 
 import classes from './step1.module.scss'
 
@@ -67,21 +67,53 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
               name="royalty"
               component="div"
             />
+            <label className={classes.label} htmlFor="nfturi">
+              NFT URI
+              <Field
+                className={classes.inputField}
+                type="nfturi"
+                name="nfturi"
+              />
+            </label>
+            <ErrorMessage
+              className={classes.error}
+              name="nfturi"
+              component="div"
+            />
 
             <div className={classes.buttonWrapper}>
               {isWalletConnected ? (
                 <>
-                  <Button type="submit" disabled={isSubmitting}>
+                  <Button
+                    type="submit"
+                    variant={Variants.PRIMARY}
+                    disabled={isSubmitting}
+                  >
                     Submit
                   </Button>
-                  <h3 className={classes.checkOffersTitle}>
-                    Already listed NFT royalty?
-                  </h3>
-                  <Button onClick={forwardToCheckOffers}>Check offers</Button>
                 </>
               ) : (
                 <ConnectWalletButton />
               )}
+              <h3 className={classes.checkOffersTitle}>
+                Already listed NFT royalty?
+              </h3>
+              <div>
+                <Button
+                  disabled={!isWalletConnected}
+                  onClick={forwardToCheckOffers}
+                >
+                  Check offers
+                </Button>
+                {!isWalletConnected && (
+                  <span className={classes.hint}>
+                    ?
+                    <span className={classes.hintContent}>
+                      Connect Wallet first
+                    </span>
+                  </span>
+                )}
+              </div>
             </div>
           </Form>
         )}

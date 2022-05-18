@@ -11,9 +11,12 @@
 }
 
 .card {
-  height: 60px;
+  height: 200px;
   flex-basis: 22%;
   background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   &:hover {
     background-color: rgb(49, 49, 49);

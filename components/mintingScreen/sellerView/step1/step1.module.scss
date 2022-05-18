@@ -52,4 +52,37 @@
 
 .checkOffersTitle {
   margin: 20px 0;
+  position: relative;
+}
+
+.hint {
+  position: absolute;
+  font-size: .5em;
+  margin-top: -0.5em;
+  border: 1px solid white;
+  color: white;
+  padding: 4px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+
+  
+  & .hintContent {
+    display: block;
+    width: 100px;
+    visibility: hidden;
+    background-color: rgb(49, 49, 49);
+    padding: 6px;
+    font-size: 0.8rem;  
+}
+
+  &:hover { 
+    & .hintContent {
+      visibility: visible;
+      transition: 0.5s opacity;
+    }
+  }
 }

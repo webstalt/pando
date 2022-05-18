@@ -1,5 +1,8 @@
 .styledLink {
   cursor: pointer;
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
 
   @keyframes textColor {
     0% {
