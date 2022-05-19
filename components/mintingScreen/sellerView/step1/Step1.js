@@ -93,7 +93,6 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
                     type="submit"
                     variant={Variants.PRIMARY}
                     disabled={isSubmitting}
-                    onClick={handleMintNft}
                   >
                     Submit
                   </Button>
