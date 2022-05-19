@@ -1,0 +1,88 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.inputField {
+  --color: mediumaquamarine;
+  --hover: #{adjust-hue(mediumaquamarine, 45deg)};
+
+  width: 100%;
+  padding: 1em 1.5em;
+
+  background-color: transparent;
+  color: white;
+  line-height: 20px;
+
+  border: 2px solid var(--color);
+  border-radius: 8px;
+
+  &:focus {
+    border-color: white;
+
+    outline: none;
+  }
+}
+
+.error {
+  color: red;
+  align-self: flex-start;
+  opacity: 0.7;
+}
+
+.stepTitle {
+  margin: 36px 0 22px;
+  padding-top: 36px;
+}
+
+.buttonWrapper {
+  margin-top: 16px;
+}
+
+.checkOffersTitle {
+  margin: 20px 0;
+  position: relative;
+}
+
+.hint {
+  position: absolute;
+  font-size: .5em;
+  margin-top: -0.5em;
+  border: 1px solid white;
+  color: white;
+  padding: 4px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+
+  
+  & .hintContent {
+    display: block;
+    width: 100px;
+    visibility: hidden;
+    background-color: rgb(49, 49, 49);
+    padding: 6px;
+    font-size: 0.8rem;  
+}
+
+  &:hover { 
+    & .hintContent {
+      visibility: visible;
+      transition: 0.5s opacity;
+    }
+  }
+}

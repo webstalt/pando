@@ -1,0 +1,24 @@
+.stepTitle {
+  margin: 30px 0;
+  padding-top: 36px;
+}
+
+.nftsGrid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card {
+  height: 200px;
+  flex-basis: 22%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &:hover {
+    background-color: rgb(49, 49, 49);
+  }
+}

@@ -21,6 +21,7 @@
     "babel-register": "^6.26.0",
     "dotenv": "^16.0.0",
     "env-cmd": "^10.1.0",
+    "classnames": "^2.3.1",
     "formik": "^2.2.9",
     "next": "12.1.5",
     "next-images": "^1.8.4",
