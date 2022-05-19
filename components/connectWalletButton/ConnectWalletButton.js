@@ -2,20 +2,18 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Web3 from 'web3'
 
-import { setIsWalletConnected } from '../../app/user/userSlice'
+import {
+  setIsWalletConnected,
+  setWalletAddress,
+  setVmContract,
+} from '../../app/user/userSlice'
 import mintNFTContract from '../../blockchain/contract.js'
 import { Button } from '../button/Button'
 
-import { pinJSONToIPFS } from "./pinata.js"
-
-import Child from '../mintingScreen/sellerView/SellerView'
-
-
-
 export function ConnectWalletButton() {
   const [web3, setWeb3] = useState({})
-  const [address, setAddress] = useState({})
-  const [vmContract, setVmContract] = useState(null)
+  const address = useSelector((state) => state.user.walletAddress)
+  const vmContract = useSelector((state) => state.user.vmContract)
 
   const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
   const [switchNetwork, setSwitchNetwork] = useState(true)
@@ -25,41 +23,7 @@ export function ConnectWalletButton() {
   useEffect(() => {
     if (vmContract && address) dispatch(setIsWalletConnected(true))
   }, [vmContract, address])
-  
-  const mintNFT = async(name, price, royalty) => {
-    const metadata = new Object();
-    metadata.name = "RoyaltyNFT1 " + name;
-    metadata.image = "https://gateway.pinata.cloud/ipfs/QmcQSgUvy1hLtqioBXDe2g4c6hAtKUc1P2Ec8xixAh3E1Z"; //TODO
-    metadata.description = royalty;
-  
-    const pinataResponse = await pinJSONToIPFS(metadata);
-    if (!pinataResponse.success) {
-      return {
-        success: false,
-        status: "😢 Something went wrong while uploading your tokenURI.",
-      };
-    }
-    const tokenURI = pinataResponse.pinataUrl;
-    console.log(address)
-    // Make call to smart contract to mint NFT
-    try {
-      const gasPrice = await web3.eth.getGasPrice();
-      gasPrice = parseInt(gasPrice)
-  
-      const result = await vmContract.methods.mintNFT().send({
-          from: address,
-          gasPrice: gasPrice,
-          recipient: address, //TODO: Possibly allow the user to change the recipient? Currently the recipient is the same as the minter.
-          tokenURI: tokenURI
-      })
-      console.log(result)
-    } catch (err) {
-        console.log(err)
-    }
-  }
 
-
-  
   const connectWalletHandler = async () => {
     console.log('connectWalletHandler Called')
     if (
@@ -74,17 +38,17 @@ export function ConnectWalletButton() {
         //console.log("web3 set")
 
         const accounts = await web3.eth.getAccounts() //Get list of accounts associated with the wallet
-        setAddress(accounts[0])
+        dispatch(setWalletAddress(accounts[0]))
         //console.log("Account address set")
 
         const vm = mintNFTContract(web3)
-        setVmContract(vm)
+        dispatch(setVmContract(vm))
 
         if (window.ethereum.networkVersion == '3') {
           //TODO: Change chain ID, currently set to Ropsten Test network
           console.log(
             'window.ethereum.networkVersion',
-             window.ethereum.networkVersion
+            window.ethereum.networkVersion
           )
           setSwitchNetwork(false)
         } else {
@@ -107,7 +71,7 @@ export function ConnectWalletButton() {
     window.ethereum.on('accountsChanged', (accounts) => {
       // Handle the new accounts, or lack thereof.
       // "accounts" will always be an array, but it can be empty.
-      setAddress(accounts[0])
+      dispatch(setWalletAddress(accounts[0]))
       console.log('Account changed to:', accounts[0])
       //Check if a user has disconnected all addresses from the website
       if (accounts[0] == null) {
@@ -119,11 +83,12 @@ export function ConnectWalletButton() {
 
   //Event listener for chainId changes
   const chainChangedListener = async () => {
-    console.log("chainChangedListener Called: ", window.ethereum.networkVersion)
-    
+    console.log('chainChangedListener Called: ', window.ethereum.networkVersion)
+
     ethereum.on('chainChanged', (chainId) => {
-      console.log("Inner chain:", chainId)
-      if (chainId != '0x3') { //TODO: Change before deployment
+      console.log('Inner chain:', chainId)
+      if (chainId != '0x3') {
+        //TODO: Change before deployment
         setSwitchNetwork(true)
         console.log('setting Switch Network to True')
       } else {
@@ -184,10 +149,4 @@ export function ConnectWalletButton() {
       )}
     </div>
   )
-
-  
 }
-
-
-
-

@@ -1,11 +1,17 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { mintNft } from '../../../../app/user/userSlice'
 import { ConnectWalletButton } from '../../../connectWalletButton/ConnectWalletButton'
 import { Button, Variants } from '../../../button/Button'
 
 import classes from './step1.module.scss'
 
 export function Step1({ isWalletConnected, forwardToCheckOffers }) {
+  const dispatch = useDispatch()
+
+  const vmContract = useSelector((state) => state.user.vmContract)
+
   return (
     <>
       <h3 className={classes.stepTitle}>Fill NFT information form</h3>
@@ -30,11 +36,7 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          // TODO: here will be a callback that sends data
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            setSubmitting(false)
-          }, 400)
+          dispatch(mintNft({ ...values, vmContract }))
         }}
       >
         {({ isSubmitting }) => (
@@ -91,6 +93,7 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
                     type="submit"
                     variant={Variants.PRIMARY}
                     disabled={isSubmitting}
+                    onClick={handleMintNft}
                   >
                     Submit
                   </Button>
@@ -102,7 +105,7 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
           </Form>
         )}
       </Formik>
-      
+
       <h3 className={classes.checkOffersTitle}>Already listed NFT royalty?</h3>
       <div>
         <Button disabled={!isWalletConnected} onClick={forwardToCheckOffers}>
