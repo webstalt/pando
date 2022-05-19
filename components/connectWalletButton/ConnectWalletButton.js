@@ -6,6 +6,12 @@ import { setIsWalletConnected } from '../../app/user/userSlice'
 import mintNFTContract from '../../blockchain/contract.js'
 import { Button } from '../button/Button'
 
+import { pinJSONToIPFS } from "./pinata.js"
+
+import Child from '../mintingScreen/sellerView/SellerView'
+
+
+
 export function ConnectWalletButton() {
   const [web3, setWeb3] = useState({})
   const [address, setAddress] = useState({})
@@ -19,7 +25,41 @@ export function ConnectWalletButton() {
   useEffect(() => {
     if (vmContract && address) dispatch(setIsWalletConnected(true))
   }, [vmContract, address])
+  
+  const mintNFT = async(name, price, royalty) => {
+    const metadata = new Object();
+    metadata.name = "RoyaltyNFT1 " + name;
+    metadata.image = "https://gateway.pinata.cloud/ipfs/QmcQSgUvy1hLtqioBXDe2g4c6hAtKUc1P2Ec8xixAh3E1Z"; //TODO
+    metadata.description = royalty;
+  
+    const pinataResponse = await pinJSONToIPFS(metadata);
+    if (!pinataResponse.success) {
+      return {
+        success: false,
+        status: "😢 Something went wrong while uploading your tokenURI.",
+      };
+    }
+    const tokenURI = pinataResponse.pinataUrl;
+    console.log(address)
+    // Make call to smart contract to mint NFT
+    try {
+      const gasPrice = await web3.eth.getGasPrice();
+      gasPrice = parseInt(gasPrice)
+  
+      const result = await vmContract.methods.mintNFT().send({
+          from: address,
+          gasPrice: gasPrice,
+          recipient: address, //TODO: Possibly allow the user to change the recipient? Currently the recipient is the same as the minter.
+          tokenURI: tokenURI
+      })
+      console.log(result)
+    } catch (err) {
+        console.log(err)
+    }
+  }
 
+
+  
   const connectWalletHandler = async () => {
     console.log('connectWalletHandler Called')
     if (
@@ -144,4 +184,10 @@ export function ConnectWalletButton() {
       )}
     </div>
   )
+
+  
 }
+
+
+
+
