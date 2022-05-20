@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { mintNft } from '../../../../app/user/userSlice'
 import { ConnectWalletButton } from '../../../connectWalletButton/ConnectWalletButton'
 import { Button, Variants } from '../../../button/Button'
@@ -9,8 +9,6 @@ import classes from './step1.module.scss'
 
 export function Step1({ isWalletConnected, forwardToCheckOffers }) {
   const dispatch = useDispatch()
-
-  const vmContract = useSelector((state) => state.user.vmContract)
 
   return (
     <>
@@ -36,7 +34,7 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const result = dispatch(mintNft({ ...values, vmContract }))
+          const result = dispatch(mintNft({ ...values }))
             .then((res) => {
               setSubmitting(false)
               console.log(res, 'result in onSubmit')

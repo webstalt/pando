@@ -18,11 +18,12 @@ const initialState = {
   mintedNftData: null,
 }
 
-const address = "0x47C6B0C3528d9aDf6D442007F772c73bd85fC901"
+const address = '0x47C6B0C3528d9aDf6D442007F772c73bd85fC901'
 
 export const mintNft = createAsyncThunk(
   mintNftAction,
-  async ({ name, price, royalty, nfturi, vmContract }) => {
+  async ({ name, price, royalty, nfturi }, { getState }) => {
+    const state = getState()
     const metadata = new Object()
     metadata.name = 'RoyaltyNFT1 ' + name
     metadata.image =
@@ -38,20 +39,19 @@ export const mintNft = createAsyncThunk(
       }
     }
     const tokenURI = pinataResponse.pinataUrl
-    console.log(tokenURI," tokenURI")
-    console.log(address, 'address')
+    console.log(tokenURI, ' tokenURI')
+    console.log(state.walletAddress, 'address')
     // Make call to smart contract to mint NFT
     try {
       await window.web3.currentProvider.enable()
-      web3 = new Web3(window.ethereum)
+      const web3 = new Web3(window.ethereum)
       const gasPrice = await web3.eth.getGasPrice()
       gasPrice = parseInt(gasPrice)
-      console.log(gasPrice, " gasPrice")
+      console.log(gasPrice, ' gasPrice')
 
       const result = await vmContract.methods.mintNFT(address, tokenURI).send({
-        from: address,
+        from: state.walletAddress,
         gasPrice: gasPrice,
-        
       })
       console.log(result, 'mintNft thunk result')
       return result
