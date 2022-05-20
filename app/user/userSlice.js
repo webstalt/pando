@@ -29,7 +29,6 @@ export const mintNft = createAsyncThunk(
     metadata.image =
       'https://gateway.pinata.cloud/ipfs/QmcQSgUvy1hLtqioBXDe2g4c6hAtKUc1P2Ec8xixAh3E1Z' //TODO
     metadata.description = royalty
-    metadata.key = 32342
 
     const pinataResponse = await pinJSONToIPFS(metadata)
     if (!pinataResponse.success) {
@@ -40,7 +39,7 @@ export const mintNft = createAsyncThunk(
     }
     const tokenURI = pinataResponse.pinataUrl
     console.log(tokenURI, ' tokenURI')
-    console.log(state.walletAddress, 'address')
+    console.log(state.user.walletAddress, 'address')
     // Make call to smart contract to mint NFT
     try {
       await window.web3.currentProvider.enable()
@@ -49,10 +48,10 @@ export const mintNft = createAsyncThunk(
       gasPrice = parseInt(gasPrice)
       console.log(gasPrice, ' gasPrice')
 
-      const result = await state.vmContract.methods
-        .mintNFT(state.walletAddress, tokenURI)
+      const result = await state.user.vmContract?.methods
+        .mintNFT(state.user.walletAddress, tokenURI)
         .send({
-          from: state.walletAddress,
+          from: state.user.walletAddress,
           gasPrice: gasPrice,
         })
       console.log(result, 'mintNft thunk result')
