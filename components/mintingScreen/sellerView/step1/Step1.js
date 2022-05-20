@@ -36,7 +36,9 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          dispatch(mintNft({ ...values, vmContract }))
+          const result = dispatch(mintNft({ ...values, vmContract }))
+          console.log(result, 'result in onSubmit')
+          setSubmitting(false)
         }}
       >
         {({ isSubmitting }) => (

@@ -2,7 +2,7 @@ import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { pinJSONToIPFS } from '../pinata.js'
 
-const mintNftAction = createAction('mintNft')
+const mintNftAction = createAction('mintNftAction')
 
 export const Roles = {
   SELLER: 'seller',
@@ -18,12 +18,13 @@ const initialState = {
 
 export const mintNft = createAsyncThunk(
   mintNftAction,
-  async ({ name, price, royalty, vmContract }) => {
+  async ({ name, price, royalty, nfturi, vmContract }) => {
     const metadata = new Object()
     metadata.name = 'RoyaltyNFT1 ' + name
     metadata.image =
       'https://gateway.pinata.cloud/ipfs/QmcQSgUvy1hLtqioBXDe2g4c6hAtKUc1P2Ec8xixAh3E1Z' //TODO
     metadata.description = royalty
+    metadata.key = 32342
 
     const pinataResponse = await pinJSONToIPFS(metadata)
     if (!pinataResponse.success) {
@@ -33,7 +34,7 @@ export const mintNft = createAsyncThunk(
       }
     }
     const tokenURI = pinataResponse.pinataUrl
-    console.log(address)
+    console.log(address, 'address')
     // Make call to smart contract to mint NFT
     try {
       const gasPrice = await web3.eth.getGasPrice()
@@ -45,10 +46,10 @@ export const mintNft = createAsyncThunk(
         recipient: address, //TODO: Possibly allow the user to change the recipient? Currently the recipient is the same as the minter.
         tokenURI: tokenURI,
       })
-      console.log(result)
+      console.log(result, 'mintNft thunk result')
       return result
     } catch (err) {
-      console.log(err)
+      console.log(err, 'mintNft thunk error')
     }
   }
 )
