@@ -49,10 +49,12 @@ export const mintNft = createAsyncThunk(
       gasPrice = parseInt(gasPrice)
       console.log(gasPrice, ' gasPrice')
 
-      const result = await vmContract.methods.mintNFT(address, tokenURI).send({
-        from: state.walletAddress,
-        gasPrice: gasPrice,
-      })
+      const result = await state.vmContract.methods
+        .mintNFT(address, tokenURI)
+        .send({
+          from: state.walletAddress,
+          gasPrice: gasPrice,
+        })
       console.log(result, 'mintNft thunk result')
       return result
     } catch (err) {
