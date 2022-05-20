@@ -48,13 +48,14 @@ export const mintNft = createAsyncThunk(
       gasPrice = parseInt(gasPrice)
       console.log(gasPrice, ' gasPrice')
 
-      const result = await state.user.vmContract?.methods
+      const result = await state.user.vmContract.methods
         .mintNFT(state.user.walletAddress, tokenURI)
         .send({
           from: state.user.walletAddress,
           gasPrice: gasPrice,
         })
       console.log(result, 'mintNft thunk result')
+      console.log("https://ropsten.etherscan.io/tx/" + result.transactionHash)
       return result
     } catch (err) {
       console.log(err, 'mintNft thunk error')
