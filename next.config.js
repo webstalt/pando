@@ -1,5 +1,6 @@
 const baseUrl = process.env.IS_DEVELOPMENT ? '' : '/pando'
 const withImages = require('next-images')
+require("dotenv").config()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withImages({
@@ -18,3 +19,5 @@ const nextConfig = withImages({
 })
 
 module.exports = nextConfig
+
+

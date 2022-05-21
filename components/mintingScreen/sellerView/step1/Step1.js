@@ -1,11 +1,15 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
+import { useDispatch } from 'react-redux'
+import { mintNft } from '../../../../app/user/userSlice'
 import { ConnectWalletButton } from '../../../connectWalletButton/ConnectWalletButton'
 import { Button, Variants } from '../../../button/Button'
 
 import classes from './step1.module.scss'
 
 export function Step1({ isWalletConnected, forwardToCheckOffers }) {
+  const dispatch = useDispatch()
+
   return (
     <>
       <h3 className={classes.stepTitle}>Fill NFT information form</h3>
@@ -30,11 +34,12 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          // TODO: here will be a callback that sends data
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            setSubmitting(false)
-          }, 400)
+          const result = dispatch(mintNft({ ...values }))
+            .then((res) => {
+              setSubmitting(false)
+              console.log(res, 'result in onSubmit')
+            })
+            .catch((e) => console.error(e, error in onSubmit))
         }}
       >
         {({ isSubmitting }) => (
@@ -102,7 +107,7 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
           </Form>
         )}
       </Formik>
-      
+
       <h3 className={classes.checkOffersTitle}>Already listed NFT royalty?</h3>
       <div>
         <Button disabled={!isWalletConnected} onClick={forwardToCheckOffers}>

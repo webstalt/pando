@@ -10,6 +10,14 @@ import { Step4 } from './step4/Step4'
 import { Step5 } from './step5/Step5'
 import classes from './sellerView.module.scss'
 
+//import { pinJSONToIPFS } from "./pinata.js";
+
+//import { mintNFT } from '../../connectWalletButton/ConnectWalletButton'
+
+//require('dotenv').config();
+//const key = process.env.REACT_APP_PINATA_KEY;
+//const secret = process.env.REACT_APP_PINATA_SECRET;
+
 const Steps = [0, 1, 2, 3, 4]
 
 const PercentageOfStep = {

@@ -7,6 +7,10 @@ export function makeStore() {
     reducer: {
       user: userReducer,
     },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
   })
 }
 
