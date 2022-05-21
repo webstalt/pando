@@ -1,8 +1,21 @@
+import classnames from 'classnames'
 import classes from './button.module.scss'
 
-export function Button({ children, onClick }) {
+export const Variants = {
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+}
+
+export function Button({ children, ...rest }) {
   return (
-    <button className={classes.button} onClick={onClick}>
+    <button
+      {...rest}
+      className={
+        rest.variant === Variants.PRIMARY
+          ? classnames(classes.button, classes.primary)
+          : classes.button
+      }
+    >
       {children}
     </button>
   )

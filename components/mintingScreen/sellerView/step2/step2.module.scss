@@ -1,0 +1,23 @@
+.stepTitle {
+  margin: 36px 0 22px;
+  padding-top: 36px;
+}
+
+.layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.leftSide {
+  flex-basis: 50%;
+}
+
+.rightSide {
+  flex-basis: 50%;
+  align-items: center;
+}
+
+.text {
+  margin-bottom: 20px;
+}

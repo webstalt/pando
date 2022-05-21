@@ -1,0 +1,44 @@
+.stepTitle {
+  margin: 30px 0;
+  padding-top: 36px;
+}
+
+.table {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+
+  &:hover {
+    background-color: rgb(49, 49, 49);
+  }
+}
+
+.cell {
+  border: 1px solid mediumaquamarine;
+  flex-basis: 25%;
+  padding: 10px;
+}
+
+.th {
+  font-weight: 700;
+}
+
+
+.actionButton {
+  padding: 2px;
+}
+
+.svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+.accept {
+  color: lightgreen;
+}
+
+.decline {
+  color: lightsalmon;
+}
