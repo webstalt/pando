@@ -30,3 +30,89 @@
   background-size: 100%;
   margin: 0 auto;
 }
+
+.roadmapWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  width: calc(50% + 0.5px);
+  border-width: 0;
+  border-style: solid;
+  border-color: white;
+  padding-bottom: 20px;
+}
+
+.rowLeftPart {
+  border-right-width: 1px;
+}
+
+.rowRightPart {
+  border-left-width: 1px;
+  margin-left: auto;
+}
+
+.block {
+  position: relative;
+  width: 60%;
+  box-sizing: border-box;
+  color: black;
+  padding: 20px 20px;
+
+  margin-left: auto;
+  margin-right: 70px;
+
+  background-color: #279CEE;
+  border-radius: 12px;
+
+  &.highlight {
+    background-color: white;
+    transition: background-color 0.5s ease;
+  }
+
+  &:before {
+    position: absolute;
+    display: block;
+    content: " ";
+    height: 1px;
+    width: 70px;
+    background-color: white;
+    top: 50%;
+    left: 100%;
+  }
+
+  &:after {
+    position: absolute;
+    display: block;
+    content: " ";
+    height: 16px;
+    width: 16px;
+    background-color: #279CEE;
+   
+    top: calc(50% - 8px);
+    left: calc(100% + 62px);
+    border-radius: 50%;
+  }
+
+  &.highlight:after {
+    background-color: white;
+    transition: background-color 0.5s ease;
+  }
+}
+
+.rowRightPart .block {
+  margin-left: 0;
+  margin-right: auto;
+  margin-left: 70px;
+
+  &:before {
+    left: initial;
+    right: 100%;
+  }
+
+  &:after {
+    left: initial;
+    right: calc(100% + 62px);
+  }
+}
