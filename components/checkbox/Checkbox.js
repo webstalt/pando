@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import classes from './checkbox.module.scss'
 
@@ -10,6 +10,10 @@ export function Checkbox({
   ...rest
 }) {
   const [isChecked, setIsChecked] = useState(checked)
+  useEffect(() => {
+    setIsChecked(checked)
+  }, [checked])
+
   return (
     <div>
       <input
@@ -17,8 +21,7 @@ export function Checkbox({
         id={name}
         type="checkbox"
         value={value}
-        defaultChecked={isChecked}
-        onChange={() => setIsChecked(!isChecked)}
+        checked={isChecked}
         {...rest}
       />
       <label htmlFor={name}>{label}</label>

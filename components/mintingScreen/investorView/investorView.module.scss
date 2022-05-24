@@ -6,6 +6,13 @@
 .stepName {
   max-width: 160px;
   margin-top: 64px;
+
+  &.clickable {
+    cursor: pointer;
+  }
+  &.clickable:hover {
+    font-weight: 800;
+  }
 }
 
 

@@ -16,6 +16,10 @@
 }
 
 .cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border: 1px solid mediumaquamarine;
   flex-basis: 25%;
   padding: 10px;
@@ -41,4 +45,9 @@
 
 .decline {
   color: lightsalmon;
+}
+
+.preview {
+  max-width: 150px;
+  max-height: 150px;
 }
