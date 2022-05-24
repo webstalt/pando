@@ -1,44 +1,46 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Button, Variants } from '../../../button/Button'
-import { Checkbox } from '../../../checkbox/Checkbox'
+import { CardsGrid } from './CardsGrid'
 
 import classes from './step3.module.scss'
 
-export function Step3({}) {
+export function Step3({ forwardStep }) {
   const [selection, setSelection] = useState(null)
+  const [isListed, setIsListed] = useState(false)
 
   const handleCheckboxClick = (target) => {
     if (target.checked) {
       setSelection(target.value)
     } else {
-      setSelection(null)
+      setSelection(undefined)
     }
   }
 
-  return (
+  const handleSubmit = useCallback(async () => {
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        setIsListed(true)
+        resolve()
+      }, 300)
+    })
+  }, [])
+
+  return !isListed ? (
+    <CardsGrid
+      selection={selection}
+      handleCheckboxClick={handleCheckboxClick}
+      handleSubmit={handleSubmit}
+    />
+  ) : (
     <>
-      <h3 className={classes.stepTitle}>List NFT royalty for sale</h3>
-      <div className={classes.nftsGrid}>
-        <div className={classes.card}>
-          A CARD
-          <div>info</div>
-          <div>info</div>
-          <div>info</div>
-          <Checkbox
-            value={'select'}
-            name={'select'}
-            onChange={(event) => handleCheckboxClick(event.target)}
-          />
-        </div>
-        <div className={classes.card}>A CARD</div>
-        <div className={classes.card}>A CARD</div>
-        <div className={classes.card}>A CARD</div>
-        <div className={classes.card}>A CARD</div>
-        <div className={classes.card}>A CARD</div>
-        <div className={classes.card}>A CARD</div>
-      </div>
-      <Button disabled={!selection} type="submit" variant={Variants.PRIMARY}>
-        List NFT royalty for sale
+      <br />
+      <br />
+      <h3 className={classes.stepTitle}>
+        Congratulations,
+        <br /> Listing Complete!
+      </h3>
+      <Button type="submit" variant={Variants.PRIMARY} onClick={forwardStep}>
+        Continue
       </Button>
     </>
   )

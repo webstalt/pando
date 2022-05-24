@@ -4,7 +4,7 @@ import { Button, Variants } from '../../../button/Button'
 
 import classes from './step2.module.scss'
 
-export function Step2({}) {
+export function Step2({ forwardStep }) {
   return (
     <>
       <h3 className={classes.stepTitle}>Submit offer for NFT royalty stream</h3>
@@ -23,11 +23,7 @@ export function Step2({}) {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              // TODO: here will be a callback that sends data
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
-                setSubmitting(false)
-              }, 400)
+              forwardStep()
             }}
           >
             {({ isSubmitting }) => (

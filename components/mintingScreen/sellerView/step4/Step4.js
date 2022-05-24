@@ -41,13 +41,19 @@ export function Step4({}) {
       <h3 className={classes.stepTitle}>Current Offers</h3>
       <div className={classes.table}>
         <div className={classes.row}>
-          <div className={classnames(classes.cell, classes.th)}>bidder</div>
-          <div className={classnames(classes.cell, classes.th)}>bid price</div>
-          <div className={classnames(classes.cell, classes.th)}>bid date</div>
+          <div className={classnames(classes.cell, classes.th)}>Bidder</div>
+          <div className={classnames(classes.cell, classes.th)}>Bid price</div>
+          <div className={classnames(classes.cell, classes.th)}>Bid date</div>
           <div className={classnames(classes.cell, classes.th)}></div>
         </div>
         <div className={classes.row}>
-          <div className={classes.cell}>name</div>
+          <div className={classes.cell}>
+            <img
+              className={classes.preview}
+              src="https://lh3.googleusercontent.com/lhIMUd5XQeJ49qKbgXXOhbEHRXp4uZba-Q0mOGoDpIehIaEkB0mp8ES-AQmto3wigq0Riiwy4DDV-EzDWQyTwTC6sBzrq5hx23J8=w600"
+            />
+            Aotearoa Dreaming
+          </div>
           <div className={classes.cell}>$350</div>
           <div className={classes.cell}>12/11/2022</div>
           <div className={classes.cell}>
