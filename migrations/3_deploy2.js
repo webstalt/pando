@@ -1,18 +1,4 @@
-const NFTCollection = artifacts.require("NFTCollection");
-const NFTMarketplace = artifacts.require("NFTMarketplace");
-const RBFVault = artifacts.require("RBFVault");
-
-module.exports = async function (deployer) {
-  await deployer.deploy(NFTCollection);
-  const deployedNFT =  await NFTCollection.deployed();
-
-  const NFTAddress = deployedNFT.address;
-  await deployer.deploy(NFTMarketplace, NFTAddress);
-};
-
-
-
-
+const Migrations = artifacts.require("Migrations");
 const RBFVault = artifacts.require("RBFVault");
 const PaymentSplitter = artifacts.require("PaymentSplitter");
 const CompoundEth = artifacts.require("CompoundEth");
