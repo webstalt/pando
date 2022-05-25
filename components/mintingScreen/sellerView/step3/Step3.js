@@ -1,12 +1,16 @@
 import { useState, useCallback } from 'react'
 import { Button, Variants } from '../../../button/Button'
 import { CardsGrid } from './CardsGrid'
+import { useDispatch} from 'react-redux'
 
 import classes from './step3.module.scss'
+
+import { createEscrow } from '../../../../app/user/userSlice'
 
 export function Step3({ forwardStep }) {
   const [selection, setSelection] = useState(null)
   const [isListed, setIsListed] = useState(false)
+  const dispatch = useDispatch()
 
   const handleCheckboxClick = (target) => {
     if (target.checked) {
@@ -17,12 +21,8 @@ export function Step3({ forwardStep }) {
   }
 
   const handleSubmit = useCallback(async () => {
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        setIsListed(true)
-        resolve()
-      }, 300)
-    })
+    await dispatch(createEscrow())
+    setIsListed(true)
   }, [])
 
   return !isListed ? (
