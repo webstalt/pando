@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import 'react-step-progress-bar/styles.css'
 import { ProgressBar, Step } from 'react-step-progress-bar'
-import { useEffect, useState } from 'react'
+import classNames from 'classnames'
 
 import { Step1 } from './step1/Step1'
 import { Step2 } from './step2/Step2'
@@ -35,7 +36,10 @@ export function InvestorView() {
         >
           <Step transition="scale" position={0}>
             {({ accomplished }) => (
-              <div className={classes.stepName}>
+              <div
+                onClick={() => setCurrentStep(Steps[0])}
+                className={classNames(classes.stepName, classes.clickable)}
+              >
                 Select NFT royalty stream to buy
               </div>
             )}
@@ -51,7 +55,20 @@ export function InvestorView() {
 
           <Step transition="scale" position={100}>
             {({ accomplished }) => (
-              <div className={classes.stepName}>Seed funds</div>
+              <div
+                onClick={
+                  currentStep === Steps[0] && isWalletConnected
+                    ? () => setCurrentStep(Steps[2])
+                    : () => {}
+                }
+                className={
+                  currentStep === Steps[0] && isWalletConnected
+                    ? classNames(classes.stepName, classes.clickable)
+                    : classes.stepName
+                }
+              >
+                Review Bids
+              </div>
             )}
           </Step>
         </ProgressBar>
@@ -59,12 +76,15 @@ export function InvestorView() {
       {currentStep === Steps[0] && (
         <Step1
           isWalletConnected={isWalletConnected}
+          forwardStep={() => setCurrentStep(Steps[1])}
           forwardToCheckOffers={() => setCurrentStep(Steps[2])}
         />
       )}
-      {currentStep === Steps[1] && <Step2 />}
+      {currentStep === Steps[1] && (
+        <Step2 forwardStep={() => setCurrentStep(Steps[2])} />
+      )}
       {currentStep === Steps[2] && <Step3 />}
-
+      <br />
       <button
         className={classes.fakeButton}
         onClick={() => setCurrentStep(currentStep + 1)}

@@ -143,6 +143,22 @@ const MintingScreenComponent = ({ data }, ref) => {
                   Submit offer for NFT royalty stream
                 </div>
               </div>
+              <div className={classnames(classes.row, classes.rowRightPart)}>
+                <div
+                  className={
+                    highlightSide === 'right'
+                      ? classnames(classes.block, classes.highlight)
+                      : classes.block
+                  }
+                  onMouseEnter={
+                    highlightSide !== 'right'
+                      ? () => setHighlightSide('right')
+                      : null
+                  }
+                >
+                  Escrow funds in vault
+                </div>
+              </div>
               <div
                 className={classnames(classes.row, classes.rowLeftPart)}
                 onMouseEnter={
@@ -177,22 +193,6 @@ const MintingScreenComponent = ({ data }, ref) => {
                   }
                 >
                   Receive funds
-                </div>
-              </div>
-              <div className={classnames(classes.row, classes.rowRightPart)}>
-                <div
-                  className={
-                    highlightSide === 'right'
-                      ? classnames(classes.block, classes.highlight)
-                      : classes.block
-                  }
-                  onMouseEnter={
-                    highlightSide !== 'right'
-                      ? () => setHighlightSide('right')
-                      : null
-                  }
-                >
-                  Seed funds
                 </div>
               </div>
             </div>

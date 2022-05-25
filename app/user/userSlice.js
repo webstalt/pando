@@ -16,19 +16,25 @@ const initialState = {
   role: null,
   walletAddress: null,
   mintedNftData: null,
+  preMintingData: {
+    name: null,
+    price: null,
+    royalty: null,
+    nfturi: null,
+  },
 }
 
 const address = '0x47C6B0C3528d9aDf6D442007F772c73bd85fC901'
 
 export const mintNft = createAsyncThunk(
   mintNftAction,
-  async ({ name, price, royalty, nfturi }, { getState }) => {
+  async ({}, { getState }) => {
     const state = getState()
     const metadata = new Object()
-    metadata.name = 'RoyaltyNFT1 ' + name
-    metadata.image =
-      'https://gateway.pinata.cloud/ipfs/QmcQSgUvy1hLtqioBXDe2g4c6hAtKUc1P2Ec8xixAh3E1Z' //TODO
-    metadata.description = royalty
+    metadata.name = 'RoyaltyNFT1 ' + state.user.preMintingData.name
+    metadata.image = state.user.preMintingData.nfturi
+    metadata.royalty = state.user.preMintingData.royalty
+    metadata.price = state.user.preMintingData.price
 
     const pinataResponse = await pinJSONToIPFS(metadata)
     if (!pinataResponse.success) {
@@ -55,7 +61,7 @@ export const mintNft = createAsyncThunk(
           gasPrice: gasPrice,
         })
       console.log(result, 'mintNft thunk result')
-      console.log("https://ropsten.etherscan.io/tx/" + result.transactionHash)
+      console.log('https://ropsten.etherscan.io/tx/' + result.transactionHash)
       return result
     } catch (err) {
       console.log(err, 'mintNft thunk error')
@@ -80,10 +86,28 @@ export const userSlice = createSlice({
     setRole: (state, action) => {
       state.role = action.payload
     },
+    setPreMintingName: (state, action) => {
+      state.preMintingData.name = action.payload
+    },
+    setPreMintingPrice: (state, action) => {
+      state.preMintingData.price = action.payload
+    },
+    setPreMintingRoyalty: (state, action) => {
+      state.preMintingData.royalty = action.payload
+    },
+    setPreMintingURI: (state, action) => {
+      state.preMintingData.nfturi = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(mintNft.fulfilled, (state, action) => {
       state.mintedNftData = action.payload
+      state.preMintingData = {
+        name: null,
+        price: null,
+        royalty: null,
+        nfturi: null,
+      }
     })
   },
 })
@@ -93,5 +117,9 @@ export const {
   setRole,
   setWalletAddress,
   setVmContract,
+  setPreMintingName,
+  setPreMintingPrice,
+  setPreMintingRoyalty,
+  setPreMintingURI,
 } = userSlice.actions
 export default userSlice.reducer

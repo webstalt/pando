@@ -1,52 +1,73 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
-import { useDispatch } from 'react-redux'
-import { mintNft } from '../../../../app/user/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  setPreMintingName,
+  setPreMintingPrice,
+  setPreMintingRoyalty,
+  setPreMintingURI,
+} from '../../../../app/user/userSlice'
 import { ConnectWalletButton } from '../../../connectWalletButton/ConnectWalletButton'
 import { Button, Variants } from '../../../button/Button'
 
 import classes from './step1.module.scss'
 
-export function Step1({ isWalletConnected, forwardToCheckOffers }) {
+export function Step1({
+  isWalletConnected,
+  forwardToCheckOffers,
+  forwardStep,
+}) {
   const dispatch = useDispatch()
+
+  const preMintingRoyalty = useSelector(
+    (state) => state.user.preMintingData.royalty
+  )
+
+  const preMintingName = useSelector((state) => state.user.preMintingData.name)
+
+  const preMintingPrice = useSelector(
+    (state) => state.user.preMintingData.price
+  )
+
+  const preMintingURI = useSelector((state) => state.user.preMintingData.nfturi)
 
   return (
     <>
       <h3 className={classes.stepTitle}>Fill NFT information form</h3>
       <Formik
         validateOnChange={false}
-        validateOnBlur={false}
         initialValues={{ name: '', royalty: '', price: '', nfturi: '' }}
         validate={(values) => {
           const errors = {}
-          if (!values.name) {
+          if (!preMintingName) {
             errors.name = 'Required'
           }
-          if (!values.royalty) {
+          if (!preMintingRoyalty) {
             errors.royalty = 'Required'
           }
-          if (!values.price) {
+          if (!preMintingPrice) {
             errors.price = 'Required'
           }
-          if (!values.nfturi) {
+          if (!preMintingURI) {
             errors.nfturi = 'Required'
           }
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const result = dispatch(mintNft({ ...values }))
-            .then((res) => {
-              setSubmitting(false)
-              console.log(res, 'result in onSubmit')
-            })
-            .catch((e) => console.error(e, error in onSubmit))
+          setSubmitting(false)
         }}
       >
         {({ isSubmitting }) => (
           <Form className={classes.form}>
             <label className={classes.label} htmlFor="name">
               Name
-              <Field className={classes.inputField} type="name" name="name" />
+              <Field
+                value={preMintingName}
+                onChange={(e) => dispatch(setPreMintingName(e.target.value))}
+                className={classes.inputField}
+                type="name"
+                name="name"
+              />
             </label>
             <ErrorMessage
               className={classes.error}
@@ -55,7 +76,13 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
             />
             <label className={classes.label} htmlFor="price">
               Price
-              <Field className={classes.inputField} type="price" name="price" />
+              <Field
+                value={preMintingPrice}
+                onChange={(e) => dispatch(setPreMintingPrice(e.target.value))}
+                className={classes.inputField}
+                type="price"
+                name="price"
+              />
             </label>
             <ErrorMessage
               className={classes.error}
@@ -65,6 +92,8 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
             <label className={classes.label} htmlFor="royalty">
               Royalty
               <Field
+                value={preMintingRoyalty}
+                onChange={(e) => dispatch(setPreMintingRoyalty(e.target.value))}
                 className={classes.inputField}
                 type="royalty"
                 name="royalty"
@@ -78,6 +107,8 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
             <label className={classes.label} htmlFor="nfturi">
               NFT URI
               <Field
+                value={preMintingURI}
+                onChange={(e) => dispatch(setPreMintingURI(e.target.value))}
                 className={classes.inputField}
                 type="nfturi"
                 name="nfturi"
@@ -95,7 +126,7 @@ export function Step1({ isWalletConnected, forwardToCheckOffers }) {
                   <Button
                     type="submit"
                     variant={Variants.PRIMARY}
-                    disabled={isSubmitting}
+                    onClick={() => forwardStep()}
                   >
                     Submit
                   </Button>

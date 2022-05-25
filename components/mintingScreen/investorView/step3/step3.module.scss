@@ -9,18 +9,23 @@
 
 .row {
   display: flex;
-
-  &:hover {
-    background-color: rgb(49, 49, 49);
-  }
 }
 
 .cell {
-  border: 1px solid mediumaquamarine;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-basis: 25%;
   padding: 10px;
+  border: 1px solid mediumaquamarine;
 }
 
 .th {
   font-weight: 700;
+}
+
+.preview {
+  max-width: 150px;
+  max-height: 150px;
 }

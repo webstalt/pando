@@ -4,12 +4,20 @@ import { Button, Variants } from '../../../button/Button'
 
 import classes from './step2.module.scss'
 
-export function Step2({}) {
+export function Step2({ forwardStep }) {
   return (
     <>
       <h3 className={classes.stepTitle}>Submit offer for NFT royalty stream</h3>
       <div className={classes.layout}>
-        <div className={classes.leftSide}>NFT info</div>
+        <div className={classes.leftSide}>
+          <img
+            className={classes.imgPreview}
+            src="https://lh3.googleusercontent.com/22B9oc-IJCoQUsASC6cI0pA84aV4eRlgXj5ki0yGnvdq4RSWexy37H_S95i0KmOCUpJel8HJU93Nfe3YSiJjyyWOn7ZFr-5a7iRHSA=w600"
+          />
+          <div>Hanky Panky</div>
+          <div>$550</div>
+          <div>Listed 05/12/2022</div>
+        </div>
         <div className={classes.rightSide}>
           <Formik
             validateOnChange={false}
@@ -23,11 +31,7 @@ export function Step2({}) {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              // TODO: here will be a callback that sends data
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
-                setSubmitting(false)
-              }, 400)
+              forwardStep()
             }}
           >
             {({ isSubmitting }) => (
