@@ -55,7 +55,7 @@ export function Step4({}) {
             Aotearoa Dreaming
           </div>
           <div className={classes.cell}>$350</div>
-          <div className={classes.cell}>12/11/2022</div>
+          <div className={classes.cell}>04/11/2022</div>
           <div className={classes.cell}>
             <div className={classes.actionButton}>
               <StyledLink>{iconAccept} Accept</StyledLink>
@@ -66,9 +66,15 @@ export function Step4({}) {
           </div>
         </div>
         <div className={classes.row}>
-          <div className={classes.cell}>name</div>
-          <div className={classes.cell}>$350</div>
-          <div className={classes.cell}>12/11/2022</div>
+          <div className={classes.cell}>
+            <img
+              className={classes.preview}
+              src="https://lh3.googleusercontent.com/22B9oc-IJCoQUsASC6cI0pA84aV4eRlgXj5ki0yGnvdq4RSWexy37H_S95i0KmOCUpJel8HJU93Nfe3YSiJjyyWOn7ZFr-5a7iRHSA=w600"
+            />
+            Hanky Panky
+          </div>
+          <div className={classes.cell}>$550</div>
+          <div className={classes.cell}>05/12/2022</div>
           <div className={classes.cell}>
             <div className={classes.actionButton}>
               <StyledLink>{iconAccept} Accept</StyledLink>
