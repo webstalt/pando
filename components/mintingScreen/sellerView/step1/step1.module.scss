@@ -3,10 +3,12 @@
   flex-direction: column;
   gap: 10px;
   width: 50%;
+  max-width: 550px;
   margin: 0 auto;
 }
 
 .label {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -32,6 +34,18 @@
     border-color: white;
 
     outline: none;
+  }
+}
+
+.priceFieldSign {
+  position: absolute;
+  display: block;
+  content: '$';
+  color: white;
+  left: 1em;
+  top: calc(50% + 2px);
+  & ~ .inputField {
+    padding-left: 2.3em;
   }
 }
 

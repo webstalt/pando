@@ -6,14 +6,17 @@ import {
   setIsWalletConnected,
   setWalletAddress,
   setVmContract,
+  setEscrowVMContract,
 } from '../../app/user/userSlice'
 import mintNFTContract from '../../blockchain/contract.js'
+import escrowContract from '../../blockchain/escrowContract.js'
 import { Button } from '../button/Button'
 
 export function ConnectWalletButton() {
   const [web3, setWeb3] = useState({})
   const address = useSelector((state) => state.user.walletAddress)
   const vmContract = useSelector((state) => state.user.vmContract)
+  const escrowVMContract = useSelector((state) => state.user.escrowVMContract)
 
   const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
   const [switchNetwork, setSwitchNetwork] = useState(true)
@@ -42,7 +45,9 @@ export function ConnectWalletButton() {
         //console.log("Account address set")
 
         const vm = mintNFTContract(web3)
+        const vm1 = escrowContract(web3)
         dispatch(setVmContract(vm))
+        dispatch(setEscrowVMContract(vm1))
 
         if (window.ethereum.networkVersion == '3') {
           //TODO: Change chain ID, currently set to Ropsten Test network
