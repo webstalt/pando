@@ -35,7 +35,7 @@ export function Step2({ forwardStep }) {
         </div>
         <div className={classes.rightSide}>
           <div className={classes.text}>name: {preMintingName}</div>
-          <div className={classes.text}>price: {preMintingPrice}</div>
+          <div className={classes.text}>price: ${preMintingPrice}</div>
           <div className={classes.text}>royalty: {preMintingRoyalty}</div>
           <Button
             type="submit"

@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-
 import { useDispatch, useSelector } from 'react-redux'
+
 import {
   setPreMintingName,
   setPreMintingPrice,
@@ -76,6 +76,7 @@ export function Step1({
             />
             <label className={classes.label} htmlFor="price">
               Price
+              <span className={classes.priceFieldSign}>$</span>
               <Field
                 value={preMintingPrice}
                 onChange={(e) => dispatch(setPreMintingPrice(e.target.value))}

@@ -1,8 +1,12 @@
+import { useSelector } from 'react-redux'
+
 import { Checkbox } from '../../../checkbox/Checkbox'
 import { Button, Variants } from '../../../button/Button'
 import classes from './step3.module.scss'
 
 export const CardsGrid = ({ selection, handleCheckboxClick, handleSubmit }) => {
+  const mintedNftData = useSelector((state) => state.user.mintedNftData)
+
   return (
     <>
       <h3 className={classes.stepTitle}>List NFT royalty for sale</h3>
@@ -35,20 +39,21 @@ export const CardsGrid = ({ selection, handleCheckboxClick, handleSubmit }) => {
             onChange={(event) => handleCheckboxClick(event.target)}
           />
         </div>
-        <div className={classes.card}>
-          <img
-            className={classes.preview}
-            src="https://lh3.googleusercontent.com/vfYB4RarIqixy2-wyfP4lIdK6fsOT8uNrmKxvYCJdjdRwAMj2ZjC2zTSxL-YKky0s-4Pb6eML7ze3Ouj54HrpUlfSWx52xF_ZK2TYw=h600"
-          />
-          Air Blocks
-          <div>price: $700</div>
-          <Checkbox
-            checked={selection === '3'}
-            value={'3'}
-            name={'3'}
-            onChange={(event) => handleCheckboxClick(event.target)}
-          />
-        </div>
+        {mintedNftData && (
+          <>
+            <div className={classes.card}>
+              <img className={classes.preview} src={mintedNftData.image} />
+              {mintedNftData.name}
+              <div>price: ${mintedNftData.price}</div>
+              <Checkbox
+                checked={selection === '3'}
+                value={'3'}
+                name={'3'}
+                onChange={(event) => handleCheckboxClick(event.target)}
+              />
+            </div>
+          </>
+        )}
       </div>
       <Button
         disabled={!selection}

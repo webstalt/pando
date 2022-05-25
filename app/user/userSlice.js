@@ -25,7 +25,6 @@ const initialState = {
   },
 }
 
-
 export const mintNft = createAsyncThunk(
   mintNftAction,
   async ({}, { getState }) => {
@@ -62,8 +61,13 @@ export const mintNft = createAsyncThunk(
         })
       console.log(result, 'mintNft thunk result')
       console.log('https://ropsten.etherscan.io/tx/' + result.transactionHash)
-      return result
-      //result.events.Transfer.returnValues.tokenID
+      return {
+        name: state.user.preMintingData.name,
+        price: state.user.preMintingData.price,
+        image: state.user.preMintingData.nfturi,
+        royalty: state.user.preMintingData.royalty,
+        tokenId: result.events.Transfer.returnValues.tokenId,
+      }
     } catch (err) {
       console.log(err, 'mintNft thunk error')
     }
@@ -82,7 +86,11 @@ export const createEscrow = createAsyncThunk(
       console.log(gasPrice, ' gasPrice')
 
       const result = await state.user.escrowVMContract.methods
-        .createEscrow("0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE", 1, 1) //NFT address(hard-coded is ok), TODO: NFT index, TODO: Price
+        .createEscrow(
+          '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
+          state.user.mintedNftData.tokenId,
+          state.user.mintedNftData.price
+        ) //NFT address(hard-coded is ok), NFT index, Price
         .send({
           from: state.user.walletAddress,
           gasPrice: gasPrice,
@@ -93,7 +101,6 @@ export const createEscrow = createAsyncThunk(
     } catch (err) {
       console.log(err, 'createEscrow error')
     }
-
   }
 )
 
