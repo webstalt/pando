@@ -55,7 +55,20 @@ export function InvestorView() {
 
           <Step transition="scale" position={100}>
             {({ accomplished }) => (
-              <div className={classes.stepName}>Seed funds</div>
+              <div
+                onClick={
+                  currentStep === Steps[0] && isWalletConnected
+                    ? () => setCurrentStep(Steps[2])
+                    : () => {}
+                }
+                className={
+                  currentStep === Steps[0] && isWalletConnected
+                    ? classNames(classes.stepName, classes.clickable)
+                    : classes.stepName
+                }
+              >
+                Review Bids
+              </div>
             )}
           </Step>
         </ProgressBar>

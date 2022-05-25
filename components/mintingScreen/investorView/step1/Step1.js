@@ -32,16 +32,30 @@ export function Step1({
             Aotearoa Dreaming
           </div>
           <div className={classes.cell}>$350</div>
-          <div className={classes.cell}>12/11/2022</div>
+          <div className={classes.cell}>05/04/2022</div>
+          <div className={classes.cell}></div>
+        </div>
+        <div
+          className={classes.row}
+          onClick={isWalletConnected ? forwardStep : () => {}}
+        >
+          <div className={classes.cell}>
+            <img
+              className={classes.preview}
+              src="https://lh3.googleusercontent.com/22B9oc-IJCoQUsASC6cI0pA84aV4eRlgXj5ki0yGnvdq4RSWexy37H_S95i0KmOCUpJel8HJU93Nfe3YSiJjyyWOn7ZFr-5a7iRHSA=w600"
+            />
+            Hanky Panky
+          </div>
+          <div className={classes.cell}>$550</div>
+          <div className={classes.cell}>05/12/2022</div>
           <div className={classes.cell}></div>
         </div>
       </div>
-
-      {!isWalletConnected && <ConnectWalletButton />}
-
       <h3 className={classes.checkOffersTitle}>
         Already chosen NFT royalty stream?
       </h3>
+      {!isWalletConnected && <ConnectWalletButton />}
+
       <div>
         <Button
           onClick={forwardToCheckOffers}

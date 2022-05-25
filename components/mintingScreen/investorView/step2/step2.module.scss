@@ -11,6 +11,13 @@
   flex-basis: 50%;
 }
 
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -54,3 +61,7 @@
   opacity: 0.7;
 }
 
+.imgPreview {
+  max-width: 300px;
+  max-height: 300px;
+}
