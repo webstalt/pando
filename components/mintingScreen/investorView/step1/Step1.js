@@ -1,4 +1,6 @@
 import classnames from 'classnames'
+import { useSelector } from 'react-redux'
+
 import { ConnectWalletButton } from '../../../connectWalletButton/ConnectWalletButton'
 import { Button, Variants } from '../../../button/Button'
 
@@ -9,6 +11,8 @@ export function Step1({
   forwardStep,
   forwardToCheckOffers,
 }) {
+  const mintedNftData = useSelector((state) => state.user.mintedNftData)
+
   return (
     <>
       <h3 className={classes.stepTitle}>Select NFT royalty stream to buy</h3>
@@ -20,36 +24,24 @@ export function Step1({
           <div className={classnames(classes.cell, classes.th)}>List date</div>
           <div className={classnames(classes.cell, classes.th)}></div>
         </div>
-        <div
-          className={classes.row}
-          onClick={isWalletConnected ? forwardStep : () => {}}
-        >
-          <div className={classes.cell}>
-            <img
-              className={classes.preview}
-              src="https://lh3.googleusercontent.com/lhIMUd5XQeJ49qKbgXXOhbEHRXp4uZba-Q0mOGoDpIehIaEkB0mp8ES-AQmto3wigq0Riiwy4DDV-EzDWQyTwTC6sBzrq5hx23J8=w600"
-            />
-            Aotearoa Dreaming
+        {mintedNftData ? (
+          <div
+            className={classes.row}
+            onClick={isWalletConnected ? forwardStep : () => {}}
+          >
+            <div className={classes.cell}>
+              <img className={classes.preview} src={mintedNftData.image} />
+              {mintedNftData.name}
+            </div>
+            <div className={classes.cell}>{mintedNftData.price} ETH</div>
+            <div className={classes.cell}>
+              {new Date().toLocaleDateString()}
+            </div>
+            <div className={classes.cell}></div>
           </div>
-          <div className={classes.cell}>350 ETH</div>
-          <div className={classes.cell}>05/04/2022</div>
-          <div className={classes.cell}></div>
-        </div>
-        <div
-          className={classes.row}
-          onClick={isWalletConnected ? forwardStep : () => {}}
-        >
-          <div className={classes.cell}>
-            <img
-              className={classes.preview}
-              src="https://lh3.googleusercontent.com/22B9oc-IJCoQUsASC6cI0pA84aV4eRlgXj5ki0yGnvdq4RSWexy37H_S95i0KmOCUpJel8HJU93Nfe3YSiJjyyWOn7ZFr-5a7iRHSA=w600"
-            />
-            Hanky Panky
-          </div>
-          <div className={classes.cell}>550 ETH</div>
-          <div className={classes.cell}>05/12/2022</div>
-          <div className={classes.cell}></div>
-        </div>
+        ) : (
+          <div className={classes.cell}>There is no data yet</div>
+        )}
       </div>
       <h3 className={classes.checkOffersTitle}>
         Already chosen NFT royalty stream?

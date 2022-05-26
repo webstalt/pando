@@ -1,8 +1,11 @@
 import classnames from 'classnames'
+import { useSelector } from 'react-redux'
 
 import classes from './step3.module.scss'
 
 export function Step3({}) {
+  const mintedNftData = useSelector((state) => state.user.mintedNftData)
+
   return (
     <>
       <h3 className={classes.stepTitle}>Funding & Bid Dashboard</h3>
@@ -48,6 +51,23 @@ export function Step3({}) {
             (awaiting accept/decline from Seller)
           </div>
         </div>
+        {mintedNftData && (
+          <div className={classes.row}>
+            <div className={classes.cell}>
+              <img className={classes.preview} src={mintedNftData.image} />
+              {mintedNftData.name}
+            </div>
+            <div className={classes.cell}>{mintedNftData.price} ETH</div>
+            <div className={classes.cell}>
+              {new Date().toLocaleDateString()}
+            </div>
+            <div className={classes.cell}>Funded</div>
+            <div className={classes.cell}>
+              Pending <br />
+              (awaiting accept/decline from Seller)
+            </div>
+          </div>
+        )}
       </div>
     </>
   )

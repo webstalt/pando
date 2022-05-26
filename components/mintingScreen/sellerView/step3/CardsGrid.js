@@ -31,7 +31,7 @@ export const CardsGrid = ({ selection, handleCheckboxClick, handleSubmit }) => {
             src="https://lh3.googleusercontent.com/22B9oc-IJCoQUsASC6cI0pA84aV4eRlgXj5ki0yGnvdq4RSWexy37H_S95i0KmOCUpJel8HJU93Nfe3YSiJjyyWOn7ZFr-5a7iRHSA=w600"
           />
           Hanky Panky
-          <div>price: ETH 550</div>
+          <div>price: 550 ETH</div>
           <Checkbox
             checked={selection === '2'}
             value={'2'}

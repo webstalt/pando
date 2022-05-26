@@ -56,7 +56,7 @@ export function Step4({}) {
           <div className={classnames(classes.cell, classes.th)}>Bid date</div>
           <div className={classnames(classes.cell, classes.th)}></div>
         </div>
-        {mintedNftData && (
+        {mintedNftData ? (
           <div className={classes.row}>
             <div className={classes.cell}>
               <img className={classes.preview} src={mintedNftData.image} />
@@ -77,6 +77,8 @@ export function Step4({}) {
               </div>
             </div>
           </div>
+        ) : (
+          <div className={classes.cell}>There is no data yet</div>
         )}
       </div>
     </>
