@@ -8,6 +8,7 @@ const mintNftAction = createAction('mintNftAction')
 const escrowCreateAction = createAction('escrowCreateAction')
 const escrowConfirmPaymentAction = createAction('escrowConfirmPaymentAction')
 const escrowConfirmDeliveryAction = createAction('escrowConfirmDeliveryAction')
+const requestConversionAction = createAction('requestConversionAction')
 
 export const Roles = {
   SELLER: 'seller',
@@ -25,6 +26,7 @@ const initialState = {
     royalty: null,
     nfturi: null,
   },
+  conversion: null,
 }
 
 export const mintNft = createAsyncThunk(
@@ -93,7 +95,7 @@ export const createEscrow = createAsyncThunk(
         .createEscrow(
           '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
           state.user.mintedNftData.tokenId,
-          Web3.utils.toWei(String(price), "ether")
+          Web3.utils.toWei(String(price), 'ether')
         ) //NFT address(hard-coded is ok), NFT index, Price
         .send({
           from: state.user.walletAddress,
@@ -111,70 +113,94 @@ export const createEscrow = createAsyncThunk(
 export const confirmPaymentEscrow = createAsyncThunk(
   escrowConfirmPaymentAction,
   async ({}, { getState }) => {
-  const state = getState()
-  try {
-    await window.web3.currentProvider.enable()
-    const web3 = new Web3(window.ethereum)
-    const gasPrice = await web3.eth.getGasPrice()
-    gasPrice = parseInt(gasPrice)
-    //console.log(gasPrice, ' gasPrice')
+    const state = getState()
+    try {
+      await window.web3.currentProvider.enable()
+      const web3 = new Web3(window.ethereum)
+      const gasPrice = await web3.eth.getGasPrice()
+      gasPrice = parseInt(gasPrice)
+      //console.log(gasPrice, ' gasPrice')
 
-    const price = state.user.mintedNftData.price
+      const price = state.user.mintedNftData.price
 
-
-    const result = await state.user.escrowVMContract.methods
-      .confirmPayment(
-        '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
-        state.user.mintedNftData.tokenId
-        //
-      ) //NFT address(hard-coded is ok), NFT index, Price
-      .send({
-        from: state.user.walletAddress,
-        gasPrice: gasPrice,
-        value: Web3.utils.toWei(String(price), "ether")
-      })
+      const result = await state.user.escrowVMContract.methods
+        .confirmPayment(
+          '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
+          state.user.mintedNftData.tokenId
+          //
+        ) //NFT address(hard-coded is ok), NFT index, Price
+        .send({
+          from: state.user.walletAddress,
+          gasPrice: gasPrice,
+          value: Web3.utils.toWei(String(price), 'ether'),
+        })
 
       console.log(result, 'Confirm payment for escrow')
-      const transactionLink = 'https://ropsten.etherscan.io/tx/' + result.transactionHash
+      const transactionLink =
+        'https://ropsten.etherscan.io/tx/' + result.transactionHash
       console.log(transactionLink)
-      alert("Transaction Successful: " + transactionLink)
+      alert('Transaction Successful: ' + transactionLink)
       return result
-  } catch (err) {
-    console.log(err, 'confirmPaymentEscrow error')
-  }
+    } catch (err) {
+      console.log(err, 'confirmPaymentEscrow error')
+    }
   }
 )
 
 export const confirmDeliveryEscrow = createAsyncThunk(
   escrowConfirmDeliveryAction,
   async ({}, { getState }) => {
-  const state = getState()
-  try {
-    await window.web3.currentProvider.enable()
-    const web3 = new Web3(window.ethereum)
-    const gasPrice = await web3.eth.getGasPrice()
-    gasPrice = parseInt(gasPrice)
-    //console.log(gasPrice, ' gasPrice')
+    const state = getState()
+    try {
+      await window.web3.currentProvider.enable()
+      const web3 = new Web3(window.ethereum)
+      const gasPrice = await web3.eth.getGasPrice()
+      gasPrice = parseInt(gasPrice)
+      //console.log(gasPrice, ' gasPrice')
 
-    const result = await state.user.escrowVMContract.methods
-      .confirmDelivery(
-        '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
-        state.user.mintedNftData.tokenId
-        //
-      ) //NFT address(hard-coded is ok), NFT index, Price
-      .send({
-        from: state.user.walletAddress,
-        gasPrice: gasPrice,
-      })
+      const result = await state.user.escrowVMContract.methods
+        .confirmDelivery(
+          '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
+          state.user.mintedNftData.tokenId
+          //
+        ) //NFT address(hard-coded is ok), NFT index, Price
+        .send({
+          from: state.user.walletAddress,
+          gasPrice: gasPrice,
+        })
 
       console.log(result, 'Confirm delivery from escrow')
-      const transactionLink = 'https://ropsten.etherscan.io/tx/' + result.transactionHash
+      const transactionLink =
+        'https://ropsten.etherscan.io/tx/' + result.transactionHash
       console.log(transactionLink)
-      alert("Transaction Successful: " + transactionLink)
+      alert('Transaction Successful: ' + transactionLink)
       return result
-  } catch (err) {
-    console.log(err, 'confirmDeliveryEscrow error')
+    } catch (err) {
+      console.log(err, 'confirmDeliveryEscrow error')
+    }
   }
+)
+
+export const requestConversion = createAsyncThunk(
+  requestConversionAction,
+  async ({}, { getState }) => {
+    //make requests here (with fetch)
+    // try {
+    // ;(function () {
+    const result = {
+      eth: '1.839,51',
+      btc: '29.551,10',
+      eur: '1,07',
+    } // a mock
+    return {
+      eth: result.eth,
+      btc: result.btc,
+      eur: result.eur,
+    }
+    // })()
+    // } catch (err) {
+    //   console.log(err, 'requestConversion error')
+    // }
   }
 )
 
@@ -212,15 +238,19 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(mintNft.fulfilled, (state, action) => {
-      state.mintedNftData = action.payload
-      state.preMintingData = {
-        name: null,
-        price: null,
-        royalty: null,
-        nfturi: null,
-      }
-    })
+    builder
+      .addCase(mintNft.fulfilled, (state, action) => {
+        state.mintedNftData = action.payload
+        state.preMintingData = {
+          name: null,
+          price: null,
+          royalty: null,
+          nfturi: null,
+        }
+      })
+      .addCase(requestConversion.fulfilled, (state, action) => {
+        state.conversion = { ...action.payload }
+      })
   },
 })
 
