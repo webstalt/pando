@@ -84,13 +84,13 @@ export function InvestorView() {
         <Step2 forwardStep={() => setCurrentStep(Steps[2])} />
       )}
       {currentStep === Steps[2] && <Step3 />}
-      <br />
-      <button
+      {/* <br /> */}
+      {/* <button
         className={classes.fakeButton}
         onClick={() => setCurrentStep(currentStep + 1)}
       >
         next step
-      </button>
+      </button> */}
     </>
   )
 }
