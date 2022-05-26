@@ -31,7 +31,7 @@ export function Step1({
             />
             Aotearoa Dreaming
           </div>
-          <div className={classes.cell}>$350</div>
+          <div className={classes.cell}>350 ETH</div>
           <div className={classes.cell}>05/04/2022</div>
           <div className={classes.cell}></div>
         </div>
@@ -46,7 +46,7 @@ export function Step1({
             />
             Hanky Panky
           </div>
-          <div className={classes.cell}>$550</div>
+          <div className={classes.cell}>550 ETH</div>
           <div className={classes.cell}>05/12/2022</div>
           <div className={classes.cell}></div>
         </div>

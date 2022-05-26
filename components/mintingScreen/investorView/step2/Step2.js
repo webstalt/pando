@@ -1,11 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { useDispatch } from 'react-redux'
 
 import { Button, Variants } from '../../../button/Button'
 
 import classes from './step2.module.scss'
 
 import { confirmPaymentEscrow } from '../../../../app/user/userSlice'
-import { useDispatch} from 'react-redux'
 
 export function Step2({ forwardStep }) {
   const dispatch = useDispatch()
@@ -19,7 +19,7 @@ export function Step2({ forwardStep }) {
             src="https://lh3.googleusercontent.com/22B9oc-IJCoQUsASC6cI0pA84aV4eRlgXj5ki0yGnvdq4RSWexy37H_S95i0KmOCUpJel8HJU93Nfe3YSiJjyyWOn7ZFr-5a7iRHSA=w600"
           />
           <div>Hanky Panky</div>
-          <div>$550</div>
+          <div>550 ETH</div>
           <div>Listed 05/12/2022</div>
         </div>
         <div className={classes.rightSide}>
