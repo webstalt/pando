@@ -4,7 +4,11 @@ import { Button, Variants } from '../../../button/Button'
 
 import classes from './step2.module.scss'
 
+import { confirmPaymentEscrow } from '../../../../app/user/userSlice'
+import { useDispatch} from 'react-redux'
+
 export function Step2({ forwardStep }) {
+  const dispatch = useDispatch()
   return (
     <>
       <h3 className={classes.stepTitle}>Submit offer for NFT royalty stream</h3>
@@ -31,6 +35,7 @@ export function Step2({ forwardStep }) {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
+              dispatch(confirmPaymentEscrow())
               forwardStep()
             }}
           >

@@ -5,7 +5,9 @@ import { pinJSONToIPFS } from '../pinata.js'
 import Web3 from 'web3'
 
 const mintNftAction = createAction('mintNftAction')
-const escrowAction = createAction('escrowAction')
+const escrowCreateAction = createAction('escrowCreateAction')
+const escrowConfirmPaymentAction = createAction('escrowConfirmPaymentAction')
+const escrowConfirmDeliveryAction = createAction('escrowConfirmDeliveryAction')
 
 export const Roles = {
   SELLER: 'seller',
@@ -51,7 +53,7 @@ export const mintNft = createAsyncThunk(
       const web3 = new Web3(window.ethereum)
       const gasPrice = await web3.eth.getGasPrice()
       gasPrice = parseInt(gasPrice)
-      console.log(gasPrice, ' gasPrice')
+      //console.log(gasPrice, ' gasPrice')
 
       const result = await state.user.vmContract.methods
         .mintNFT(state.user.walletAddress, tokenURI)
@@ -75,7 +77,7 @@ export const mintNft = createAsyncThunk(
 )
 
 export const createEscrow = createAsyncThunk(
-  escrowAction,
+  escrowCreateAction,
   async ({}, { getState }) => {
     const state = getState()
     try {
@@ -83,13 +85,15 @@ export const createEscrow = createAsyncThunk(
       const web3 = new Web3(window.ethereum)
       const gasPrice = await web3.eth.getGasPrice()
       gasPrice = parseInt(gasPrice)
-      console.log(gasPrice, ' gasPrice')
+      //console.log(gasPrice, ' gasPrice')
+
+      const price = state.user.mintedNftData.price
 
       const result = await state.user.escrowVMContract.methods
         .createEscrow(
           '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
           state.user.mintedNftData.tokenId,
-          state.user.mintedNftData.price
+          Web3.utils.toWei(String(price), "ether")
         ) //NFT address(hard-coded is ok), NFT index, Price
         .send({
           from: state.user.walletAddress,
@@ -101,6 +105,76 @@ export const createEscrow = createAsyncThunk(
     } catch (err) {
       console.log(err, 'createEscrow error')
     }
+  }
+)
+
+export const confirmPaymentEscrow = createAsyncThunk(
+  escrowConfirmPaymentAction,
+  async ({}, { getState }) => {
+  const state = getState()
+  try {
+    await window.web3.currentProvider.enable()
+    const web3 = new Web3(window.ethereum)
+    const gasPrice = await web3.eth.getGasPrice()
+    gasPrice = parseInt(gasPrice)
+    //console.log(gasPrice, ' gasPrice')
+
+    const price = state.user.mintedNftData.price
+
+
+    const result = await state.user.escrowVMContract.methods
+      .confirmPayment(
+        '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
+        state.user.mintedNftData.tokenId
+        //
+      ) //NFT address(hard-coded is ok), NFT index, Price
+      .send({
+        from: state.user.walletAddress,
+        gasPrice: gasPrice,
+        value: Web3.utils.toWei(String(price), "ether")
+      })
+
+      console.log(result, 'Confirm payment for escrow')
+      const transactionLink = 'https://ropsten.etherscan.io/tx/' + result.transactionHash
+      console.log(transactionLink)
+      alert("Transaction Successful: " + transactionLink)
+      return result
+  } catch (err) {
+    console.log(err, 'confirmPaymentEscrow error')
+  }
+  }
+)
+
+export const confirmDeliveryEscrow = createAsyncThunk(
+  escrowConfirmDeliveryAction,
+  async ({}, { getState }) => {
+  const state = getState()
+  try {
+    await window.web3.currentProvider.enable()
+    const web3 = new Web3(window.ethereum)
+    const gasPrice = await web3.eth.getGasPrice()
+    gasPrice = parseInt(gasPrice)
+    //console.log(gasPrice, ' gasPrice')
+
+    const result = await state.user.escrowVMContract.methods
+      .confirmDelivery(
+        '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
+        state.user.mintedNftData.tokenId
+        //
+      ) //NFT address(hard-coded is ok), NFT index, Price
+      .send({
+        from: state.user.walletAddress,
+        gasPrice: gasPrice,
+      })
+
+      console.log(result, 'Confirm delivery from escrow')
+      const transactionLink = 'https://ropsten.etherscan.io/tx/' + result.transactionHash
+      console.log(transactionLink)
+      alert("Transaction Successful: " + transactionLink)
+      return result
+  } catch (err) {
+    console.log(err, 'confirmDeliveryEscrow error')
+  }
   }
 )
 

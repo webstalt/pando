@@ -4,7 +4,12 @@ import { StyledLink } from '../../../styledLink/StyledLink'
 
 import classes from './step4.module.scss'
 
+import { useCallback } from 'react'
+import { confirmDeliveryEscrow } from '../../../../app/user/userSlice'
+import { useDispatch} from 'react-redux'
+
 export function Step4({}) {
+  const dispatch = useDispatch()
   const iconAccept = (
     <svg
       className={classnames(classes.svg, classes.accept)}
@@ -35,6 +40,11 @@ export function Step4({}) {
       />
     </svg>
   )
+
+  const handleSubmit = useCallback(async () => {
+    await dispatch(confirmDeliveryEscrow())
+    
+  })
 
   return (
     <>
@@ -77,7 +87,7 @@ export function Step4({}) {
           <div className={classes.cell}>05/12/2022</div>
           <div className={classes.cell}>
             <div className={classes.actionButton}>
-              <StyledLink>{iconAccept} Accept</StyledLink>
+              <Button onClick ={handleSubmit}>{iconAccept} Accept</Button>
             </div>
             <div className={classes.actionButton}>
               <StyledLink>{iconDecline} Decline</StyledLink>
