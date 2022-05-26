@@ -45,7 +45,7 @@ export function Step2({ forwardStep }) {
             {({ isSubmitting }) => (
               <Form className={classes.form}>
                 <label className={classes.label} htmlFor="price">
-                  Bid Price
+                  Bid Price (ETH)
                   <Field
                     className={classes.inputField}
                     type="price"
