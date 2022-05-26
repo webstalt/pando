@@ -1,12 +1,11 @@
+import { useDispatch } from 'react-redux'
+import { useCallback } from 'react'
 import classnames from 'classnames'
-import { Button } from '../../../button/Button'
+
 import { StyledLink } from '../../../styledLink/StyledLink'
+import { confirmDeliveryEscrow } from '../../../../app/user/userSlice'
 
 import classes from './step4.module.scss'
-
-import { useCallback } from 'react'
-import { confirmDeliveryEscrow } from '../../../../app/user/userSlice'
-import { useDispatch} from 'react-redux'
 
 export function Step4({}) {
   const dispatch = useDispatch()
@@ -43,7 +42,6 @@ export function Step4({}) {
 
   const handleSubmit = useCallback(async () => {
     await dispatch(confirmDeliveryEscrow())
-    
   })
 
   return (
@@ -87,10 +85,14 @@ export function Step4({}) {
           <div className={classes.cell}>05/12/2022</div>
           <div className={classes.cell}>
             <div className={classes.actionButton}>
-              <Button onClick ={handleSubmit}>{iconAccept} Accept</Button>
+              <StyledLink onClick={handleSubmit}>
+                {iconAccept} Accept
+              </StyledLink>
             </div>
             <div className={classes.actionButton}>
-              <StyledLink>{iconDecline} Decline</StyledLink>
+              <StyledLink onClick={handleSubmit}>
+                {iconDecline} Decline
+              </StyledLink>
             </div>
           </div>
         </div>
