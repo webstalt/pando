@@ -1,4 +1,6 @@
 import { pinJSONToIPFS } from "./pinata.js";
+import axios from "axios";
+
 require("dotenv").config();
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const contractABI = require("../contract-abi.json");
