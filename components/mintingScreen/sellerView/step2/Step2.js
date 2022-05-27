@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, Variants } from '../../../button/Button'
 import { mintNft } from '../../../../app/user/userSlice'
+import { requestConversion } from '../../../../app/user/userSlice'
 
 import classes from './step2.module.scss'
 
@@ -22,7 +23,11 @@ export function Step2({ forwardStep }) {
   const preMintingURI = useSelector((state) => state.user.preMintingData.nfturi)
 
   const handleSubmit = useCallback(async () => {
-    await dispatch(mintNft())
+    //await dispatch(mintNft())
+    const result = await dispatch(requestConversion())
+    console.log( (parseInt(result.payload.resultEthUsd) / 1e8).toFixed(2) )
+    console.log( (parseInt(result.payload.resultBtcUsd) / 1e8).toFixed(2) )
+    console.log( (parseInt(result.payload.resultEurUsd) / 1e8).toFixed(2) )
     forwardStep()
   }, [mintNft, forwardStep, dispatch])
 

@@ -4,6 +4,7 @@ import classnames from 'classnames'
 
 import { StyledLink } from '../../../styledLink/StyledLink'
 import { confirmDeliveryEscrow } from '../../../../app/user/userSlice'
+import { declineDeliveryEscrow } from '../../../../app/user/userSlice'
 
 import classes from './step4.module.scss'
 
@@ -42,8 +43,12 @@ export function Step4({}) {
     </svg>
   )
 
-  const handleSubmit = useCallback(async () => {
+  const handleAcceptSubmit = useCallback(async () => {
     await dispatch(confirmDeliveryEscrow())
+  })
+
+  const handleDeclineSubmit = useCallback(async () => {
+    await dispatch(declineDeliveryEscrow())
   })
 
   return (
@@ -68,12 +73,14 @@ export function Step4({}) {
             </div>
             <div className={classes.cell}>
               <div className={classes.actionButton}>
-                <StyledLink onClick={handleSubmit}>
+                <StyledLink onClick={handleAcceptSubmit}>
                   {iconAccept} Accept
                 </StyledLink>
               </div>
               <div className={classes.actionButton}>
-                <StyledLink>{iconDecline} Decline</StyledLink>
+              <StyledLink onClick={handleDeclineSubmit}>
+                  {iconDecline} Decline
+                </StyledLink>
               </div>
             </div>
           </div>
