@@ -1,0 +1,39 @@
+{
+  "name": "cron",
+  "version": "2.1.0",
+  "description": "NFT Storage Cron Jobs",
+  "private": true,
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "nftstorage-metrics": "src/bin/metrics.js",
+    "nftstorage-pins": "src/bin/pins.js",
+    "nftstorage-pinata": "src/bin/pinata.js"
+  },
+  "scripts": {
+    "start": "run-s start:*",
+    "start:pins": "NODE_TLS_REJECT_UNAUTHORIZED=0 node src/bin/pins.js",
+    "start:pins-failed": "NODE_TLS_REJECT_UNAUTHORIZED=0 node src/bin/pins-failed.js",
+    "start:pinata": "node src/bin/pinata.js",
+    "start:dagcargo:sizes": "NODE_TLS_REJECT_UNAUTHORIZED=0 node src/bin/dagcargo-sizes.js",
+    "start:metrics": "NODE_TLS_REJECT_UNAUTHORIZED=0 node src/bin/metrics.js"
+  },
+  "author": "Alan Shaw",
+  "license": "(Apache-2.0 OR MIT)",
+  "dependencies": {
+    "@nftstorage/ipfs-cluster": "^5.0.1",
+    "@web-std/fetch": "^4.0.0",
+    "debug": "^4.3.2",
+    "dotenv": "^10.0.0",
+    "form-data": "^4.0.0",
+    "limiter": "2.0.1",
+    "nft.storage": "^6.0.0",
+    "p-retry": "^4.6.1",
+    "p-settle": "^5.0.0",
+    "pg": "^8.7.1",
+    "streaming-iterables": "^6.0.0"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
