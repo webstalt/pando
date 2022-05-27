@@ -11,6 +11,10 @@ export function Header() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(requestConversion())
+    //const result = await dispatch(requestConversion())
+    //console.log( (parseInt(result.payload.resultEthUsd) / 1e8).toFixed(2) )
+    //console.log( (parseInt(result.payload.resultBtcUsd) / 1e8).toFixed(2) )
+    //console.log( (parseInt(result.payload.resultEurUsd) / 1e8).toFixed(2) )
   }, [])
   const conversion = useSelector((state) => state.user.conversion)
 
