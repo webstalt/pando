@@ -1,0 +1,20 @@
+{
+  "files": {
+    "src/comps/banner/index.js": [
+      {
+        "id": "606a2f8f-a31e-49ef-8a9f-63e7f1e898ca",
+        "line": 1,
+        "version": 789,
+        "index": 0
+      }
+    ],
+    "src/comps/timeseriesChart/index.js": [
+      {
+        "id": "7eeabec4-9fd6-4162-baa9-82f4af755327",
+        "line": 1,
+        "version": 1026,
+        "index": 0
+      }
+    ]
+  }
+}
