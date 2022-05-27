@@ -7,9 +7,11 @@ import {
   setWalletAddress,
   setVmContract,
   setEscrowVMContract,
+  setChainlinkVMContract,
 } from '../../app/user/userSlice'
 import mintNFTContract from '../../blockchain/contract.js'
 import escrowContract from '../../blockchain/escrowContract.js'
+import chainlinkContract from '../../blockchain/chainlink_pricefeeds.js'
 import { Button } from '../button/Button'
 
 export function ConnectWalletButton() {
@@ -17,6 +19,7 @@ export function ConnectWalletButton() {
   const address = useSelector((state) => state.user.walletAddress)
   const vmContract = useSelector((state) => state.user.vmContract)
   const escrowVMContract = useSelector((state) => state.user.escrowVMContract)
+  const chainLinkVMContract = useSelector((state) => state.user.chainLinkVMContract)
 
   const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
   const [switchNetwork, setSwitchNetwork] = useState(true)
@@ -38,18 +41,19 @@ export function ConnectWalletButton() {
         await window.web3.currentProvider.enable()
         web3 = new Web3(window.ethereum)
         setWeb3(web3)
-        //console.log("web3 set")
 
         const accounts = await web3.eth.getAccounts() //Get list of accounts associated with the wallet
         dispatch(setWalletAddress(accounts[0]))
-        //console.log("Account address set")
 
         const vm = mintNFTContract(web3)
         const vm1 = escrowContract(web3)
+        const vm2 = chainlinkContract(web3)
+
         dispatch(setVmContract(vm))
         dispatch(setEscrowVMContract(vm1))
-
-        if (window.ethereum.networkVersion == '3') {
+        dispatch(setChainlinkVMContract(vm2))
+        
+        if (window.ethereum.networkVersion == '4') {
           //TODO: Change chain ID, currently set to Ropsten Test network
           console.log(
             'window.ethereum.networkVersion',
@@ -92,7 +96,7 @@ export function ConnectWalletButton() {
 
     ethereum.on('chainChanged', (chainId) => {
       console.log('Inner chain:', chainId)
-      if (chainId != '0x3') {
+      if (chainId != '0x4') {
         //TODO: Change before deployment
         setSwitchNetwork(true)
         console.log('setting Switch Network to True')
@@ -108,7 +112,7 @@ export function ConnectWalletButton() {
     try {
       const result = await ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x3' }], //TODO: Change before deployment
+        params: [{ chainId: '0x4' }], //TODO: Change before deployment
       })
       if (result == null) {
         //console.log("Network Set to Ropsten") //TODO: Change before deployment

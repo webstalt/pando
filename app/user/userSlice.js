@@ -9,6 +9,7 @@ const escrowCreateAction = createAction('escrowCreateAction')
 const escrowConfirmPaymentAction = createAction('escrowConfirmPaymentAction')
 const escrowConfirmDeliveryAction = createAction('escrowConfirmDeliveryAction')
 const requestConversionAction = createAction('requestConversionAction')
+const escrowDeclineDeliveryAction = createAction('escrowDeclineDeliveryAction')
 
 export const Roles = {
   SELLER: 'seller',
@@ -64,7 +65,7 @@ export const mintNft = createAsyncThunk(
           gasPrice: gasPrice,
         })
       console.log(result, 'mintNft thunk result')
-      console.log('https://ropsten.etherscan.io/tx/' + result.transactionHash)
+      console.log('https://rinkeby.etherscan.io/tx/' + result.transactionHash)
       return {
         name: state.user.preMintingData.name,
         price: state.user.preMintingData.price,
@@ -102,7 +103,11 @@ export const createEscrow = createAsyncThunk(
           gasPrice: gasPrice,
         })
       console.log(result, 'createEscrow')
-      console.log('https://ropsten.etherscan.io/tx/' + result.transactionHash)
+      const transactionLink =
+      'https://rinkeby.etherscan.io/tx/' + result.transactionHash
+      console.log(transactionLink)
+      alert('NFT Listing Successful: ' + transactionLink)
+
       return result
     } catch (err) {
       console.log(err, 'createEscrow error')
@@ -137,9 +142,10 @@ export const confirmPaymentEscrow = createAsyncThunk(
 
       console.log(result, 'Confirm payment for escrow')
       const transactionLink =
-        'https://ropsten.etherscan.io/tx/' + result.transactionHash
+        'https://rinkeby.etherscan.io/tx/' + result.transactionHash
       console.log(transactionLink)
-      alert('Transaction Successful: ' + transactionLink)
+      alert('Payment for NFT Successful: ' + transactionLink)
+
       return result
     } catch (err) {
       console.log(err, 'confirmPaymentEscrow error')
@@ -171,9 +177,10 @@ export const confirmDeliveryEscrow = createAsyncThunk(
 
       console.log(result, 'Confirm delivery from escrow')
       const transactionLink =
-        'https://ropsten.etherscan.io/tx/' + result.transactionHash
+        'https://rinkeby.etherscan.io/tx/' + result.transactionHash
       console.log(transactionLink)
-      alert('Transaction Successful: ' + transactionLink)
+      alert('Funds/NFT Delivery Successful: ' + transactionLink)
+
       return result
     } catch (err) {
       console.log(err, 'confirmDeliveryEscrow error')
@@ -181,28 +188,63 @@ export const confirmDeliveryEscrow = createAsyncThunk(
   }
 )
 
+export const declineDeliveryEscrow = createAsyncThunk(
+  escrowDeclineDeliveryAction,
+  async ({}, { getState }) => {
+    const state = getState()
+    try {
+      await window.web3.currentProvider.enable()
+      const web3 = new Web3(window.ethereum)
+      const gasPrice = await web3.eth.getGasPrice()
+      gasPrice = parseInt(gasPrice)
+      //console.log(gasPrice, ' gasPrice')
+
+      const result = await state.user.escrowVMContract.methods
+        .declinePendingOffer(
+          '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE',
+          state.user.mintedNftData.tokenId
+          //
+        ) //NFT address(hard-coded is ok), NFT index, Price
+        .send({
+          from: state.user.walletAddress,
+          gasPrice: gasPrice,
+        })
+
+      console.log(result, 'Decline pending offer from escrow')
+      const transactionLink =
+        'https://rinkeby.etherscan.io/tx/' + result.transactionHash
+      console.log(transactionLink)
+      alert('Pending Offer Declined Successful: ' + transactionLink)
+      return result
+    } catch (err) {
+      console.log(err, 'declineDeliveryEscrow error')
+    }
+  }
+)
+
 export const requestConversion = createAsyncThunk(
   requestConversionAction,
   async ({}, { getState }) => {
-    //make requests here (with fetch)
-    // try {
-    // ;(function () {
-    const result = {
-      eth: '1.839,51',
-      btc: '29.551,10',
-      eur: '1,07',
-    } // a mock
-    return {
-      eth: result.eth,
-      btc: result.btc,
-      eur: result.eur,
+    const state = getState()
+    try {
+      await window.web3.currentProvider.enable()
+      const web3 = new Web3(window.ethereum)
+
+      const resultEthUsd = await state.user.chainlinkVMContract.methods.getEthUsd().call()
+      const resultBtcUsd = await state.user.chainlinkVMContract.methods.getBtcUsd().call()
+      const resultEurUsd = await state.user.chainlinkVMContract.methods.getEurUsd().call()
+      //console.log(resultEthUsd + ' getEthUsd call ')
+      //console.log(resultBtcUsd + ' getBtcUsd call ')
+      //console.log(resultEurUsd + ' getEurUsd call ')
+
+      return {resultEthUsd, resultBtcUsd, resultEurUsd}
+    } catch (err) {
+      console.log(err)
     }
-    // })()
-    // } catch (err) {
-    //   console.log(err, 'requestConversion error')
-    // }
   }
 )
+
+
 
 export const userSlice = createSlice({
   name: 'user',
@@ -220,6 +262,9 @@ export const userSlice = createSlice({
     },
     setEscrowVMContract: (state, action) => {
       state.escrowVMContract = action.payload
+    },
+    setChainlinkVMContract: (state, action) => {
+      state.chainlinkVMContract = action.payload
     },
     setRole: (state, action) => {
       state.role = action.payload
@@ -260,6 +305,7 @@ export const {
   setWalletAddress,
   setVmContract,
   setEscrowVMContract,
+  setChainlinkVMContract,
   setPreMintingName,
   setPreMintingPrice,
   setPreMintingRoyalty,
