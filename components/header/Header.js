@@ -7,16 +7,27 @@ import { requestConversion } from '../../app/user/userSlice'
 
 import classes from './header.module.scss'
 
+
+
 export function Header() {
+  const isWalletConnected = useSelector((state) => state.user.isWalletConnected)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(requestConversion())
-    //const result = await dispatch(requestConversion())
-    //console.log( (parseInt(result.payload.resultEthUsd) / 1e8).toFixed(2) )
-    //console.log( (parseInt(result.payload.resultBtcUsd) / 1e8).toFixed(2) )
-    //console.log( (parseInt(result.payload.resultEurUsd) / 1e8).toFixed(2) )
-  }, [])
+    if(isWalletConnected){
+      
+      const result = dispatch(requestConversion())
+      console.log(result)
+      //console.log( (parseInt(result.payload.resultEthUsd) / 1e8).toFixed(2) )
+      //console.log( (parseInt(result.payload.resultBtcUsd) / 1e8).toFixed(2) )
+      //console.log( (parseInt(result.payload.resultEurUsd) / 1e8).toFixed(2) )
+      //conversion.eth = ( (parseInt(result.payload.resultEthUsd) / 1e8).toFixed(2) )
+    }
+
+    
+
+  }, [isWalletConnected])
   const conversion = useSelector((state) => state.user.conversion)
+
 
   return (
     <div className={classes.header}>

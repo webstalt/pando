@@ -233,9 +233,9 @@ export const requestConversion = createAsyncThunk(
       const resultEthUsd = await state.user.chainlinkVMContract.methods.getEthUsd().call()
       const resultBtcUsd = await state.user.chainlinkVMContract.methods.getBtcUsd().call()
       const resultEurUsd = await state.user.chainlinkVMContract.methods.getEurUsd().call()
-      console.log(resultEthUsd + ' getEthUsd call ')
-      console.log(resultBtcUsd + ' getBtcUsd call ')
-      console.log(resultEurUsd + ' getEurUsd call ')
+      //console.log(resultEthUsd + ' getEthUsd call ')
+      //console.log(resultBtcUsd + ' getBtcUsd call ')
+      //console.log(resultEurUsd + ' getEurUsd call ')
 
       return {resultEthUsd, resultBtcUsd, resultEurUsd}
     } catch (err) {
