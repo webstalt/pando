@@ -98,13 +98,13 @@ export function SellerView() {
       )}
       {currentStep === Steps[3] && <Step4 />}
       {currentStep === Steps[4] && <Step5 />}
-      <br />
-      <button
+      {/* <br /> */}
+      {/* <button
         className={classes.fakeButton}
         onClick={() => setCurrentStep(currentStep + 1)}
       >
         next step
-      </button>
+      </button> */}
     </>
   )
 }

@@ -37,18 +37,6 @@
   }
 }
 
-.priceFieldSign {
-  position: absolute;
-  display: block;
-  content: '$';
-  color: white;
-  left: 1em;
-  top: calc(50% + 2px);
-  & ~ .inputField {
-    padding-left: 2.3em;
-  }
-}
-
 .error {
   color: red;
   align-self: flex-start;

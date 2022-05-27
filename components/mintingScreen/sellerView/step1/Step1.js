@@ -75,8 +75,7 @@ export function Step1({
               component="div"
             />
             <label className={classes.label} htmlFor="price">
-              Price
-              <span className={classes.priceFieldSign}>$</span>
+              Price (ETH)
               <Field
                 value={preMintingPrice}
                 onChange={(e) => dispatch(setPreMintingPrice(e.target.value))}

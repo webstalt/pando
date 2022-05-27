@@ -34,9 +34,9 @@ export function Step2({ forwardStep }) {
           <img src={preMintingURI} className={classes.imgPreview}></img>
         </div>
         <div className={classes.rightSide}>
-          <div className={classes.text}>name: {preMintingName}</div>
-          <div className={classes.text}>price: ${preMintingPrice}</div>
-          <div className={classes.text}>royalty: {preMintingRoyalty}</div>
+          <div className={classes.text}>Name: {preMintingName}</div>
+          <div className={classes.text}>Price (ETH): {preMintingPrice}</div>
+          <div className={classes.text}>Royalty: {preMintingRoyalty}</div>
           <Button
             type="submit"
             variant={Variants.PRIMARY}
